@@ -1,0 +1,44 @@
+{
+  "name": "linkNYC-starter-bundle",
+  "version": "1.0.0",
+  "description": "Base HTML5 application to be run on Cortex player",
+  "main": "index.js",
+  "scripts": {
+    "start": "node node_modules/.bin/webpack-dev-server --define process.env.NODE_ENV='\"development\"' --hot --inline --open --progress --colors --bail --content-base src",
+    "prod": "./node_modules/.bin/webpack --define process.env.NODE_ENV='\"production\"' --progress --colors",
+    "dev": "./node_modules/.bin/webpack --define process.env.NODE_ENV='\"development\"' --progress --colors"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://"
+  },
+  "authors": "Hamza Kaya, Rodney Jean-Baptiste",
+  "license": "ISC",
+  "babel": {
+    "presets": [
+      "es2015"
+    ]
+  },
+  "devDependencies": {
+    "babel-core": "^6.24.1",
+    "babel-loader": "^6.4.1",
+    "babel-polyfill": "^6.23.0",
+    "babel-preset-es2015": "^6.24.1",
+    "clean-webpack-plugin": "^0.1.16",
+    "copy-webpack-plugin": "^4.0.1",
+    "css-loader": "^0.28.0",
+    "eslint": "^3.19.0",
+    "eslint-config-google": "^0.7.1",
+    "eslint-loader": "^1.7.1",
+    "file-loader": "^0.11.1",
+    "q": "^1.5.0",
+    "style-loader": "^0.16.1",
+    "svgo-loader": "^1.2.1",
+    "webpack": "^1.15.0",
+    "webpack-dev-server": "^1.16.3"
+  },
+  "dependencies": {
+    "moment": "^2.18.1",
+    "promise": "^7.1.1"
+  }
+}

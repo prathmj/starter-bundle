@@ -1,0 +1,63 @@
+@font-face {
+  font-family: "SourceSansPro-Bold";
+  font-style: normal;
+  font-weight: 500;
+  src: url("../fonts/source-sans-pro/SourceSansPro-Bold.otf") format("opentype"); 
+}
+
+@font-face {
+  font-family: "SourceSansPro-Light";
+  font-style: normal;
+  font-weight: 200;
+  src: url("../fonts/source-sans-pro/SourceSansPro-Light.otf") format("opentype"); 
+}
+
+.hide {
+  display: none;
+}
+
+#content {
+  font-size: 16px;
+  letter-spacing: 0;
+} 
+
+.creativeContainer {
+  width: 1080px;
+  height: 1920px;
+  padding: 75px;
+  font-family: Arial;
+  color: #fff;
+  box-sizing: border-box;
+  overflow: hidden;
+  display:none;
+  background-repeat: none;
+}
+
+.creativeContainer-header {
+  height: 730px;
+  font-size: 130px;
+  line-height: 122px;
+  font-weight: bold;
+  letter-spacing: -4px;
+}
+
+.creativeContainer-header-stroke {
+  width: 234px;
+  height: 20px;
+  font-size: 0;
+  background-color: #fff;
+  margin-bottom: 32px;
+}
+
+.placeholder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1080px;
+  height: 1920px;
+}
+
+.placeholder.invisible {
+  opacity: 0;
+}
+

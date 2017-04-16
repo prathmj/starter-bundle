@@ -1,0 +1,7 @@
+{
+    "extends": "google",
+    "rules": {
+    	"spaced-comment": 0,
+    	"no-multi-spaces": 0
+    }
+}
