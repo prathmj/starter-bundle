@@ -127,6 +127,8 @@ class View {
     this.creativeContainer.style.display = 'block';
     if (this.rows === null || this.rows.length === 0) {
       return;
+    }else{
+      this.placeholder.hide();
     }
 
     Logger.log(`The view has ${this.rows.length} data rows.`);

@@ -37,8 +37,6 @@ class Placeholder {
 
       window.document.body.appendChild(div);
       this.placeholderDiv = window.document.getElementById(GLOBAL_VARS.placeholderId);
-    } else if (this.placeholderDiv) {
-      this.placeholderDiv.className = 'placeholder';
     }
   }
 

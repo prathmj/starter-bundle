@@ -9,8 +9,8 @@
 
 module.exports = {
   apiKey: 'dc6zaTOxFJmzC',
-  appName: JSON.stringify(require("./package.json").name),
+  appName: JSON.stringify(require('./package.json').name),
   campaign: null,
   datasetId: null,
-  placeholderId: 'placeholder'
+  placeholderId: 'placeholder',
 };
