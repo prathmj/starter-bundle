@@ -1,15 +1,10 @@
-/* global window */
+/* global window GLOBAL_VARS */
 
 import View from './view.js';
 import Data from './cortex/data.js';
 import Simulator from './cortex/simulator.js';
 import Logger from './cortex/logger.js';
 import {READY_EVENT} from './cortex/events.js';
-
-/**
- TODO: Update this with your production dataset id.
-*/
-const DATASET_ID = 'com.intersection.starter';
 
 /**
  * Starts the app in simulation mode.
@@ -40,7 +35,7 @@ function main() {
   window.addEventListener(READY_EVENT, () => {
     Logger.log('Received the cortex-ready event.');
 
-    const data = new Data(DATASET_ID, view);
+    const data = new Data(GLOBAL_VARS.datasetId, view);
     data.init();
   });
 

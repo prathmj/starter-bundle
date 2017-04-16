@@ -1,8 +1,6 @@
-/* global window */
-
+/* global window GLOBAL_VARS */
+/* eslint-disable max-len*/
 import Logger from './logger.js';
-
-const PLACEHOLDER_ID = 'placeholder';
 
 class Placeholder {
   constructor() {
@@ -31,12 +29,17 @@ class Placeholder {
       console.error("Failed to load the placeholder image: ", e);
     };
 
-    const div = window.document.createElement('div');
-    div.id = PLACEHOLDER_ID;
-    div.className = 'placeholder';
-    div.appendChild(img);
+    if (!this.placeholderDiv) {
+      const div = window.document.createElement('div');
+      div.id = GLOBAL_VARS.placeholderId;
+      div.className = 'placeholder';
+      div.appendChild(img);
 
-    window.document.body.appendChild(div);
+      window.document.body.appendChild(div);
+      this.placeholderDiv = window.document.getElementById(GLOBAL_VARS.placeholderId);
+    } else if (this.placeholderDiv) {
+      this.placeholderDiv.className = 'placeholder';
+    }
   }
 
   /**
@@ -54,10 +57,15 @@ class Placeholder {
     }
 
     Logger.log('Hiding the placeholder image.');
+    this.placeholderDiv.className = 'placeholder invisible';
+    this.hidden = true;
+  }
 
-    const div = window.document.getElementById(PLACEHOLDER_ID);
-    div.className = 'placeholder invisible';
+  show() {
+    if (!this.hidden) return;
 
+    Logger.log('Showing the placeholder image.');
+    this.placeholderDiv.className = 'placeholder';
     this.hidden = true;
   }
 }

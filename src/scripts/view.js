@@ -1,22 +1,19 @@
-/* global window */
-/* eslint-disable no-unused-vars */
+/* global window GLOBAL_VARS */
 
+/*****************************/
+/*-IMPORT & REQUIRE FILES----*/
+/*****************************/
 require('../styles/css/global.css');
-
 import Placeholder from './cortex/placeholder.js';
 import Logger from './cortex/logger.js';
-
 import Tracker from './cortex/tracker.js';
-
-// TODO: Change this.
-const CAMPAIGN = 'com.intersection.starter';
 
 class View {
   constructor() {
     this.placeholder = new Placeholder();
-
     this.rows = [];
-    this.deviceId = '';
+    this.deviceId     = '';
+    this.production   = process.env.NODE_ENV !== 'development';
 
     this.creativeContainer = window.document.getElementById(
 		'creativeContainer');
@@ -77,14 +74,17 @@ class View {
    */
   render() {
     Logger.log('Rendering a new view.');
-    if (this.rows === null || this.rows.length === 0) {
-      Tracker.track(this.deviceId, CAMPAIGN, 'not tracked');
+    if (!window.document.getElementById(GLOBAL_VARS.placeholderId)) {
       this.placeholder.render();
-      return;
+    }
+    if (this.production) {
+      if (this.dataReady) {
+        Tracker.track(this.deviceId, GLOBAL_VARS.campaign, 'not tracked');
+      } else {
+        Tracker.track(this.deviceId, GLOBAL_VARS.campaign, 'tracked');
+      }
     }
 
-    this.placeholder.hide();
-    Tracker.track(this.deviceId, CAMPAIGN, 'tracked');
     this._render();
   }
 

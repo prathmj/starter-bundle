@@ -1,11 +1,12 @@
-/* global APP_NAME */
+/* global GLOBAL_VARS */
+/* eslint-disable max-len */
 
 class Logger {
   static log(msg, ...args) {
     if (args && args.length > 0) {
-      console.log(`${APP_NAME}-${new Date().getTime()}: ${msg}`, ...args);
+      console.log(`${GLOBAL_VARS.appName}-${new Date().getTime()}: ${msg}`, ...args);
     } else {
-      console.log(`${APP_NAME}-${new Date().getTime()}: ${msg}`);
+      console.log(`${GLOBAL_VARS.appName}-${new Date().getTime()}: ${msg}`);
     }
   }
 }

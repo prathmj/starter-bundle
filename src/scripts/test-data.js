@@ -1,7 +1,11 @@
 /* eslint-disable */
 
-// TODO: Update this file with the test data. The format should be exactly what
-// you get from Silo.
+/*********************************************************************************************************/
+/*------silo test data---------------------*/
+/* Replace the contents value of TEST_DATA */
+/* to match the format of your production  */
+/* data. more info: https://github.com/LinkNYC/starter-bundle/wiki/Data-Integration-%E2%80%A2-Silo-Data  */
+/*********************************************************************************************************/
 
 const TEST_DATA = [
   {"_device_id": "*", "id": "b76b1e6e-0818-41d3-b77d-7ccf414961ef", "url": "https://s3.amazonaws.com/dev.assets.vistarmedia.com/creative/1oprfWZYSRy3ZidxoVxK5g/71/197/9fdb6b31-dfe0-45ba-82f5-e1d213722fd6.png", "_index": "1", "_update_date": "2016-08-09T19:34:01.477000+00:00"},

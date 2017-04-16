@@ -28,8 +28,8 @@ module.exports = {
     new CleanWebpackPlugin(['dist', 'build'], {
       verbose: true
     }),
-    new webpack.DefinePlugin({
-      'APP_NAME': JSON.stringify(require("./package.json").name)
+    new webpack.ProvidePlugin({
+      GLOBAL_VARS: 'settings'
     }),
     new webpack.NoErrorsPlugin()
   ]
