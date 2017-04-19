@@ -1,5 +1,3 @@
-/* global window */
-
 import Logger from './logger.js';
 import {VISIBLE_EVENT, HIDDEN_EVENT} from './events.js';
 

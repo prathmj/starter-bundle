@@ -1,5 +1,3 @@
-/* global window GLOBAL_VARS */
-
 /*****************************/
 /*-IMPORT & REQUIRE FILES----*/
 /*****************************/
@@ -12,8 +10,8 @@ class View {
   constructor() {
     this.placeholder = new Placeholder();
     this.rows = [];
-    this.deviceId     = '';
-    this.production   = process.env.NODE_ENV !== 'development';
+    this.deviceId = '';
+    this.productionEnv = process.env.NODE_ENV !== 'development';
 
     this.creativeContainer = window.document.getElementById(
 		'creativeContainer');
@@ -77,7 +75,8 @@ class View {
     if (!window.document.getElementById(GLOBAL_VARS.placeholderId)) {
       this.placeholder.render();
     }
-    if (this.production) {
+
+    if (this.productionEnv) {
       if (this.dataReady) {
         Tracker.track(this.deviceId, GLOBAL_VARS.campaign, 'not tracked');
       } else {

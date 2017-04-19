@@ -1,5 +1,3 @@
-/* global window GLOBAL_VARS */
-
 import View from './view.js';
 import Data from './cortex/data.js';
 import Simulator from './cortex/simulator.js';

@@ -1,6 +1,3 @@
-/* global GLOBAL_VARS */
-/* eslint-disable max-len */
-
 class Logger {
   static log(msg, ...args) {
     if (args && args.length > 0) {

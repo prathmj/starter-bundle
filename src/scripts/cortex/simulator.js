@@ -1,5 +1,3 @@
-/* global window */
-
 import TEST_DATA from '../test-data.js';
 import Logger from './logger.js';
 import {VISIBLE_EVENT, HIDDEN_EVENT, READY_EVENT} from './events.js';

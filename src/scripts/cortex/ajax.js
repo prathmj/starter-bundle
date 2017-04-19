@@ -1,5 +1,3 @@
-/* global window */
-
 import Promise from 'promise';
 
 class Ajax {
@@ -13,7 +11,7 @@ class Ajax {
       }
 
       const xhr = Ajax.newXHR();
-      xhr.onload = function(e) {
+      xhr.onload = function() {
         if (this.status === 200) {
           if (options.dataType === 'json') {
             resolve(JSON.parse(this.response));
