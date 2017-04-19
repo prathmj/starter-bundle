@@ -1,5 +1,3 @@
-/*eslint-disable spaced-comment*/
-
 /********************************************************/
 /*------GLOBAL_VARS-------------------------------------*/
 /* These variables can be accessed anywhere in the      */
