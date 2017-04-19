@@ -7,6 +7,10 @@ var CleanWebpackPlugin = require('clean-webpack-plugin');
 module.exports = {
   context: path.join(__dirname, '/src'),
   entry: './scripts/main.js',
+  output: {
+    path: path.join(__dirname, 'build'),
+    filename: 'bundle.js'
+  },
   devServer: {
     outputPath: path.join(__dirname, 'build'),
     filename: 'bundle.js'
