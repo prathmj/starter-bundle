@@ -33,7 +33,7 @@ function main() {
   window.addEventListener(READY_EVENT, () => {
     Logger.log('Received the cortex-ready event.');
 
-    const data = new Data(GLOBAL_VARS.datasetId, view);
+    const data = new Data(GLOBAL_VARS.datasetID, view);
     data.init();
   });
 

@@ -29,12 +29,12 @@ class Placeholder {
 
     if (!this.placeholderDiv) {
       const div = window.document.createElement('div');
-      div.id = GLOBAL_VARS.placeholderId;
+      div.id = GLOBAL_VARS.placeholderID;
       div.className = 'placeholder';
       div.appendChild(img);
 
       window.document.body.appendChild(div);
-      this.placeholderDiv = window.document.getElementById(GLOBAL_VARS.placeholderId);
+      this.placeholderDiv = window.document.getElementById(GLOBAL_VARS.placeholderID);
     }else if (this.placeholderDiv) {
       this.placeholderDiv.className = 'placeholder';
     }

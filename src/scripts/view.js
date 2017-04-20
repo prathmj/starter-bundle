@@ -72,7 +72,7 @@ class View {
    */
   render() {
     Logger.log('Rendering a new view.');
-    if (!window.document.getElementById(GLOBAL_VARS.placeholderId)) {
+    if (!window.document.getElementById(GLOBAL_VARS.placeholderID)) {
       this.placeholder.render();
     }
 
