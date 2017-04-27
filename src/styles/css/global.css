@@ -67,6 +67,19 @@ body {
   line-height: 60px;
 }
 
+.creativeContainer-debugger {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1080px;
+  height: 60px;
+  background-color: #fff;
+  font-family: "SourceSansPro-Bold";
+  color: #3598db;
+  font-size: 60px;
+  line-height: 60px;
+}
+
 .placeholder {
   position: absolute;
   top: 0;

@@ -16,6 +16,9 @@ class View {
     this.creativeContainer = window.document.getElementById(
 		'creativeContainer');
 
+    this.creativeContainerDebugger = window.document.getElementById(
+    'creativeContainer-debugger');
+
     this.fnRandomImage = function(min, max) {
       return Math.floor(Math.random() * (max - min + 1)) + min;
     };
@@ -77,11 +80,7 @@ class View {
     }
 
     if (this.productionEnv) {
-      if (this.dataReady) {
-        Tracker.track(this.deviceId, GLOBAL_VARS.campaign, 'not tracked');
-      } else {
-        Tracker.track(this.deviceId, GLOBAL_VARS.campaign, 'tracked');
-      }
+      Tracker.track(this.deviceId, GLOBAL_VARS.campaign, 'tracked');
     }
 
     this._render();
