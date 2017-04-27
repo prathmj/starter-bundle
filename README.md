@@ -1,14 +1,80 @@
-# Cortex-HTML5-Base
+# LinkNYC Starter Bundle
 
-A skeleton HTML5 application built for Cortex.
+An HTML5 application built for LINKNYC.   
+This starter bundle will provide the neccessary tools to build and develop content & creative on a Link.    
+With this bundle you will have the ability to test locally and package for production.
 
-## Project Dependencies
+## Bundle Dependencies
 
 ```
 $ npm install
 ```
 
-## Project Setup
+## Bundle Structure
+```
++-- _build
+|   +-- _images
+|   +----- placeholder.jpg
+|   +-- _scripts
+|   +----- _cortex
+|   +--------- ajax.js
+|   +--------- data.js
+|   +--------- events.js
+|   +--------- logger.js
+|   +--------- placeholder.js
+|   +--------- simulator.js
+|   +--------- tracker.js
+|   +----- main.js
+|   +----- test-data.js
+|   +----- view.js
+|   +-- _styles
+|   +----- _css
+|   +--------- global.css
+|   +--------- normalize.css
+|   +----- _fonts
+|   +-- bundle.js
+|   +-- index.html
++-- _dist
+|   +-- ${APP-NAME}-${Date-Time-Stamp}.zip
++-- _node_modules
++-- _src
+|   +-- _images
+|   +----- placeholder.jpg
+|   +-- _scripts
+|   +----- _cortex
+|   +--------- ajax.js
+|   +--------- data.js
+|   +--------- events.js
+|   +--------- logger.js
+|   +--------- placeholder.js
+|   +--------- simulator.js
+|   +--------- tracker.js
+|   +----- main.js
+|   +----- test-data.js
+|   +----- view.js
+|   +-- _styles
+|   +----- _css
+|   +--------- global.css
+|   +--------- normalize.css
+|   +----- _fonts
+|   +-- bundle.js
+|   +-- index.html
++-- .eslintrc.json
++-- .gitignore
++-- Makefile
++-- package.json
++-- README.md
++-- webpack.config.js
++-- webpack.settings.js
+```
+- `./src/`: The src folder contains a structure for all your project files and assets. All your files should be stored in this folder. When the bundle is deployed, these files are copied to the `./build/` folder and zipped in the `./dist/` folder. 
+- `./src/scripts/`: All your JS files should be stored in this folder. `./src/scripts/main.js` is the main entry point. All source files will get compiled into a single `./bundle.js` by webpack. If you are running the bundle locally the `./bundle.js` will be in memory, If you build for dev or production the file will be in `./build/bundle.js`.
+ `./src/scripts/cortex/`: This folder containes all the cortex player related JS files, these files should never be edited. 
+- `./src/styles/`: Contains CSS files and CSS related files such as fonts. You can include the CSS files under this folder by requiring them in JavaScript. See `src/scripts/main.js` for an example.
+- `./src/images/`: All image file assets under this directory will get copied to the final HTML5 app directory.
+- `index.html` is the default html file for your app. You can put your app skeleton in this file or dynamically create the DOM elements in JavaScript.
+
+## Bundle Environments
 The HTML5 application is set up to run in two environments: development and production.
 
 ### Local Development
@@ -23,12 +89,6 @@ in your browser to run the app.  This mode is useful for quickly building the UI
 Similar to the development mode, the final HTML5 application will be saved under `./build`. However, you can build a final
 zip file as well by running `make dist`. The final zip will be located in `./dist/`. **The application will only work on Cortex player.**
 
-### File Structure
-- `./src/`: Source files. The src folder contains a structure for all your project files and assets. All your files should be stored in this folder.
-- `./src/scripts/`: All your JS files should be stored in this folder. `src/scripts/main.js` is the entry point. All source files will get compiled into `./build/bundle.js` by webpack.
-- `./src/styles/`: Contains CSS files and CSS related files such as fonts. You can include the CSS files under this folder by requiring them in JavaScript. See `src/scripts/main.js` for an example.
-- `./src/images/`: All image file assets under this directory will get copied to the final HTML5 app directory.
-- `index.html` is the default html file for your app. You can put your app skeleton in this file or dynamically create the DOM elements in JavaScript.
 
 ### Customizing the App
 * Change the app name in `package.json`. We use the app name in log messages.
