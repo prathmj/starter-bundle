@@ -1,7 +1,7 @@
 # LinkNYC Starter Bundle
 
 An HTML5 application built for LINKNYC.   
-This starter bundle will provide the neccessary tools to build and develop content & creative on a Link.    
+This starter bundle will provide the necessary tools to build and develop content & creative on a Link.    
 With this bundle you will have the ability to test locally and package for production.
 
 ## Bundle Dependencies
@@ -67,12 +67,16 @@ $ npm install
 +-- webpack.config.js
 +-- webpack.settings.js
 ```
-- `./src/`: The src folder contains a structure for all your project files and assets. All your files should be stored in this folder. When the bundle is deployed, these files are copied to the `./build/` folder and zipped in the `./dist/` folder. 
-- `./src/scripts/`: All your JS files should be stored in this folder. `./src/scripts/main.js` is the main entry point. All source files will get compiled into a single `./bundle.js` by webpack. If you are running the bundle locally the `./bundle.js` will be in memory, If you build for dev or production the file will be in `./build/bundle.js`.
- `./src/scripts/cortex/`: This folder containes all the cortex player related JS files, these files should never be edited. 
-- `./src/styles/`: Contains CSS files and CSS related files such as fonts. You can include the CSS files under this folder by requiring them in JavaScript. See `src/scripts/main.js` for an example.
+- `./src/`: The src folder contains a structure for all your project files and assets. All your files should be stored in this folder. When the bundle is deployed, these files are copied to the `./build/` folder and zipped in the `./dist/` folder.
+- `./src/scripts/`: All your JS files should be stored in this folder. `src/scripts/main.js` is the entry point. All source files will get compiled into `./build/bundle.js` by webpack.
+- `./src/scripts/cortex`: All Cortex player JS files are stored in this folder. These files should never be edited and are the JS core of the starter bundle.
+- `./src/styles/`: Contains CSS files and CSS related files such as fonts. You can include the CSS files under this folder by requiring them in JavaScript. See `src/scripts/view.js` for an example.
 - `./src/images/`: All image file assets under this directory will get copied to the final HTML5 app directory.
+- `./src/build/`: The build folder is where your src files will be copied and prepped for packaging.
+- `./src/dist/`: The dist folder is where your production zip will be packaged and stored.
 - `index.html` is the default html file for your app. You can put your app skeleton in this file or dynamically create the DOM elements in JavaScript.
+- `.eslintrc.json` is used to define any eslint rules and global variable exceptions.
+- `webpack.settings.js` is used to store global variables used in the app.
 
 ## Bundle Environments
 The HTML5 application is set up to run in two environments: development and production.
