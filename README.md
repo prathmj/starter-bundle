@@ -78,11 +78,8 @@ $ npm install
 - `.eslintrc.json` is used to define any eslint rules and global variable exceptions.
 - `webpack.settings.js` is used to store global variables used in the app.
 
-## Bundle Environments
-The HTML5 application is set up to run in two environments: development and production.
-
 ### Local Development
-You can test and run your code locally using webpack-dev-server. This runs your code in memory using simulation mode and will watch for any JS changes in your application. In simulation mode, the app will fire Cortex events
+You can test and run your code locally using `$ npm start`. This leverages webpack-dev-server to run your code in memory, simulating silo data locally if needed, will watch for any JS changes and CSS changes in your application. If you make any HTML changes, you will have to manually reload the page. In simulation mode, the app will fire Cortex events
 periodically and use the test data stored in `./src/test-data.js`. You can access your app in a web browser at `http://localhost:8080/`.
 
 ### Development Mode
