@@ -79,8 +79,10 @@ $ npm install
 - `webpack.settings.js` is used to store global variables used in the app.
 
 ### Local Development
-You can test and run your code locally using `$ npm start`. This leverages webpack-dev-server to run your code in memory, simulating silo data locally if needed, will watch for any JS changes and CSS changes in your application. If you make any HTML changes, you will have to manually reload the page. In simulation mode, the app will fire Cortex events
-periodically and use the test data stored in `./src/test-data.js`. You can access your app in a web browser at `http://localhost:8080/`.
+You can test and run your code locally using `$ npm start`, leveraging webpack-dev-server to run your code in memory.     
+In local development mode JS and CSS changes will be watched and auto reloaded but any HTML changes will have to manually be reloaded.     
+Any silo data will be simulated from `./src/test-data.js`, with all events firing as they would in production.    
+You can access your app in a web browser at `http://localhost:8080/`.
 
 ### Development Mode
 The final HTML5 application will be saved under `./build`. The app will start in simulation mode. Open `./build/index.html`
