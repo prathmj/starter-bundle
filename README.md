@@ -1,6 +1,6 @@
 # LinkNYC Starter Bundle
 
-An HTML5 application built for LINKNYC.   
+An HTML5 application built for LinkNYC.   
 This starter bundle will provide the necessary tools to build and develop content & creative on a Link.    
 With this bundle you will have the ability to test locally and package for production.
 
@@ -78,20 +78,34 @@ $ npm install
 - `.eslintrc.json` is used to define any eslint rules and global variable exceptions.
 - `webpack.settings.js` is used to store global variables used in the app.
 
+#### Placeholder Image
+The placeholder image is displayed on initial view of your creative and when there is an error within your code.   
+The image is located in the `./src/images/` folder and can be changed by replacing the file `./src/images/placeholder.jpg`.   
+**Note: It is recommended that your placeholder image differs from your creative for debugging.**
+
+#### Silo
+Silo manages data on a Link, providing campaigns access to the latest data stored.  When you make a change to campaign data,    
+Silo synchronizes in real time resulting in always up to the date data in your creative.   
+When developing locally or offline from an internet connection, data will be simulated from within the bundle at `./src/test-data.js`.    
+**Note: To simulate data correctly, data should be copied directly from your dataset in Silo.**
+
 ### Local Development
 You can test and run your code locally using `$ npm start`, leveraging webpack-dev-server to run your code in memory.     
-In local development mode JS and CSS changes will be watched and auto reloaded but any HTML changes will have to manually be reloaded.     
+In local development mode JS and CSS changes will be watched and auto reloaded but any HTML changes will have to be manually reloaded.     
 Any silo data will be simulated from `./src/test-data.js`, with all events firing as they would in production.    
 You can access your app in a web browser at `http://localhost:8080/`.
 
 ### Development Mode
-The final HTML5 application will be saved under `./build`. The app will start in simulation mode. Open `./build/index.html`
-in your browser to run the app.  This mode is useful for quickly building the UI and viewing the final folder structure. **Note, you will have to rebuild after any code changes.**
+You can build your code in development mode using `$ npm run dev`, this will build the app to the `./build` folder.   
+Open `./build/index.html` in your browser to run the app.   
+This mode is useful for quickly building the UI and viewing the final folder structure.   
+**Note: You will have to rebuild after any code changes and all your data from silo will be local data.**
 
 ### Production Mode
-Similar to the development mode, the final HTML5 application will be saved under `./build`. However, you can build a final
-zip file as well by running `make dist`. The final zip will be located in `./dist/`. **The application will only work on Cortex player.**
-
+You can build your code in production mode using `$ npm run prod`, this will build the app to the `./build` folder.   
+To package for the Ad Server you will need to zip the `./build` folder for trafficking to a Link.   
+You can automatically package the `./build` folder using `$ make dist`, this will zip your code to the `./dist` folder.   
+**Note: The zipped bundle and files in the `./build` folder will only work on a Link.**
 
 ### Customizing the App
 * Change the app name in `package.json`. We use the app name in log messages.
@@ -104,8 +118,13 @@ zip file as well by running `make dist`. The final zip will be located in `./dis
   * Update View.updateView() if you need to update the screen right before the app gets displayed.
 * Build the app in production mode and deploy.
 
+### Testing
+Creative can be tested locally in local development mode to verify: correct design & visual content, silo data and events firing properly.   
+If you have access to an SBC, you can test an end to end experience by registering your sbc and trafficking your creative through the ad server.    
+**Note: Even with an SBC its recommended that you test on an actual Link to ensure proper serving, displaying and optimization of your creative in a production environment.**
+
 ### Quick commands
-* Run app locally (Dev mode)
+* Run app locally (local dev mode)
 ```
 $ npm start
 ```
@@ -120,4 +139,8 @@ $ npm run prod
 * Build and package app for prod (Prod mode)
 ```
 $ make dist
+```
+OR
+```
+$ make dist-custom app=${YOUR_CUSTOM_APP_NAME}
 ```
