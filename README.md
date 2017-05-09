@@ -89,6 +89,26 @@ Silo synchronizes in real time resulting in always up to the date data in your c
 When developing locally or offline from an internet connection, data will be simulated from within the bundle at `./src/test-data.js`.    
 **Note: To simulate data correctly, data should be copied directly from your dataset in Silo.**
 
+### App Settings
+All global app settings variables are handled in `./webpack.settings.js`.
+
+* appName is used for logging messages within the app.
+* campaign tracks the campaign name in the tracking report.
+* datasetID references the production data in Silo to be used in the bundle.
+* placeholderID maps the DOM element ID for the placeholder image.
+
+### App Events
+* VISIBLE_EVENT
+* HIDDEN_EVENT
+* READY_EVENT
+
+### App Methods
+* Update `src/scripts/view.js` to handle data updates and rendering.
+  * Update View.setData() if you need to manipulate the incoming data or preload images.
+  * Update View._render() to present the data on screen.
+  * Update View.updateView() if you need to update the screen right before the app gets displayed.
+* Build the app in production mode and deploy.
+
 ### Local Development
 You can test and run your code locally using `$ npm start`, leveraging webpack-dev-server to run your code in memory.     
 In local development mode JS and CSS changes will be watched and auto reloaded but any HTML changes will have to be manually reloaded.     
@@ -106,17 +126,6 @@ You can build your code in production mode using `$ npm run prod`, this will bui
 To package for the Ad Server you will need to zip the `./build` folder for trafficking to a Link.   
 You can automatically package the `./build` folder using `$ make dist`, this will zip your code to the `./dist` folder.   
 **Note: The zipped bundle and files in the `./build` folder will only work on a Link.**
-
-### Customizing the App
-* Change the app name in `package.json`. We use the app name in log messages.
-* Change the `DATASET_ID` in `src/scripts/main.js` to the production dataset id.
-* Update `src/scripts/test-data.js` with the test data. Make sure the test data is similar to the production data.
-* Update the placeholder view in `src/scripts/cortex/placeholder.js`. Current implementation loads path to your `placeholder.jpg image`. You can simply replace this image with your version or update `src/scripts/cortex/placeholder.js` to create custom DOM elements.
-* Update `src/scripts/view.js` to handle data updates and rendering.
-  * Update View.setData() if you need to manipulate the incoming data or preload images.
-  * Update View._render() to present the data on screen.
-  * Update View.updateView() if you need to update the screen right before the app gets displayed.
-* Build the app in production mode and deploy.
 
 ### Testing
 Creative can be tested locally in local development mode to verify: correct design & visual content, silo data and events firing properly.   

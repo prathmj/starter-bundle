@@ -1,7 +1,7 @@
 {
   "name": "linkNYC-starter-bundle",
   "version": "1.0.0",
-  "description": "HTML5 starter application to be run on Cortex player",
+  "description": "HTML5 starter application to be run on LinkNYC",
   "main": "index.js",
   "scripts": {
     "start": "node node_modules/.bin/webpack-dev-server --define process.env.NODE_ENV='\"development\"' --hot --inline --open --progress --colors --bail --content-base src",
