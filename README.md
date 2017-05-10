@@ -90,17 +90,18 @@ When developing locally or offline from an internet connection, data will be sim
 **Note: To simulate data correctly, data should be copied directly from your dataset in Silo.**
 
 ### App Settings
-All global app settings variables are handled in `./webpack.settings.js`.
+All global app setting variables are handled in `./webpack.settings.js`.
 
-* appName is used for logging messages within the app.
-* campaign tracks the campaign name in the tracking report.
-* datasetID references the production data in Silo to be used in the bundle.
-* placeholderID maps the DOM element ID for the placeholder image.
+* `appName` is used for logging messages within the app.
+* `campaign` tracks the campaign name in the tracking report.
+* `datasetID` references the production data in Silo to be used in the bundle.
+* `placeholderID` maps the DOM element ID for the placeholder image.
 
 ### App Events
-* VISIBLE_EVENT
-* HIDDEN_EVENT
-* READY_EVENT
+* `VISIBLE_EVENT` fires when your app is about to become visible on screen.
+* `HIDDEN_EVENT` fires when your app is off screen or in the background.
+* `READY_EVENT` fires when the cortex player is ready and loaded.   
+ The view of your app will be created and any silo data will be loaded.  
 
 ### App Methods
 * Update `src/scripts/view.js` to handle data updates and rendering.
