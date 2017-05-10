@@ -104,11 +104,11 @@ All global app setting variables are handled in `./webpack.settings.js`.
  The view of your app will be created and any silo data will be loaded.  
 
 ### App Methods
-* Update `src/scripts/view.js` to handle data updates and rendering.
-  * Update View.setData() if you need to manipulate the incoming data or preload images.
-  * Update View._render() to present the data on screen.
-  * Update View.updateView() if you need to update the screen right before the app gets displayed.
-* Build the app in production mode and deploy.
+Update `src/scripts/view.js` to handle data updates and event based updates.
+
+* `View.setData()` called when the app receives a `HIDDEN_EVENT`, good for manipulating incoming data or preloading images.
+* `View._render()` called when the app receives a `HIDDEN_EVENT`.
+* `View.updateView()` called when the app receives a `VISIBLE_EVENT`, good for updating the screen right before the app gets displayed.
 
 ### Local Development
 You can test and run your code locally using `$ npm start`, leveraging webpack-dev-server to run your code in memory.     
