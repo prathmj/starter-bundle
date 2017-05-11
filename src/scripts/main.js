@@ -8,12 +8,13 @@ import {READY_EVENT} from './cortex/events.js';
  * Starts the app in simulation mode.
  *
  * This function will get called only when the NODE_ENV variable is set to
- * 'development'. Check out package.json to see how we set this variable.
+ * 'development'.
  *
- * In simulation mode, the app is expected to run on non-Cortex environments.
- * The Simulator will dispatch all necessary Cortex events. It will also
+ * In simulation mode, the app is expected to run on non-production environments.
+ * The Simulator will dispatch all necessary events. It will also
  * periodically dispatch the data stored in './test-data.js'. You can update
  * the event dispatch times in './data.js'.
+ *
  */
 function simulateCortexEnvironment() {
   const simulator = new Simulator();
@@ -25,6 +26,7 @@ function simulateCortexEnvironment() {
  *
  * Creates the View and Data instances. Enters the simulation mode in dev
  * environment.
+ *
  */
 function main() {
   const view = new View();

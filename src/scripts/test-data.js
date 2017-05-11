@@ -1,3 +1,11 @@
+/**
+ * Test Data
+ *
+ * Make sure this duplicates the strucutre and data in Silo
+ * so your testing environments mimic production.
+ *
+ */
+
 const TEST_DATA = [
   {"_device_id": "*", "id": "b76b1e6e-0818-41d3-b77d-7ccf414961ef", "url": "https://s3.amazonaws.com/dev.assets.vistarmedia.com/creative/1oprfWZYSRy3ZidxoVxK5g/71/197/9fdb6b31-dfe0-45ba-82f5-e1d213722fd6.png", "_index": "1", "_update_date": "2016-08-09T19:34:01.477000+00:00"},
   {"_device_id": "*", "id": "e5caae3b-964e-44b4-bb5d-21ee31b1d19d", "url": "https://s3.amazonaws.com/dev.assets.vistarmedia.com/creative/1oprfWZYSRy3ZidxoVxK5g/de/6e4/d75308bc-a674-4eaa-9a30-bef92eade350.png", "_index": "1", "_update_date": "2016-08-09T19:34:01.477000+00:00"},
