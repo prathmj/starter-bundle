@@ -129,9 +129,23 @@ You can automatically package the `./build` folder using `$ make dist`, this wil
 **Note: The zipped bundle and files in the `./build` folder will only work on a Link.**
 
 ### Testing
-Creative can be tested locally in local development mode to verify: correct design & visual content, silo data and events firing properly.   
+Creatives can be tested locally in local development mode to verify: correct design & visual content, silo data and events firing properly.   
 If you have access to an SBC, you can test an end to end experience by registering your sbc and trafficking your creative through the ad server.    
 **Note: Even with an SBC its recommended that you test on an actual Link to ensure proper serving, displaying and optimization of your creative in a production environment.**
+
+### Approved Animation Support
+| Animation        | Status           | Notes  |
+| ------------- |:-------------:| -----:|
+| Fade-In      | ✅ | Simple opacity manipulation. |
+| Bounce |  ✅    |  'Bouncing' an element using complex keyframe movements is possible.   |
+| Rotate      |✅  | Transforming using `rotate3d` yields much better results than `rotate`. |
+| Carousel-fade    | ✅      |   Simple opacity manipulation. |
+
+### Link Information
+* The time format on a Link is in UTC.
+* To make external requests from a HTML5 bundle on a Link,    
+you have to either whitelist all routes or leverage Silo.
+* Currently 1080P video is supported on a Link in MP4 format.
 
 ### Quick commands
 * Run app locally (local dev mode)
