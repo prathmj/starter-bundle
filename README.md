@@ -168,3 +168,9 @@ OR
 ```
 $ make dist-custom app=${YOUR_CUSTOM_APP_NAME}
 ```
+
+### Appendix
+* `Cortex:` Player on Link.
+* `Vistar:` Ad Server.
+* `SBC:` Single Board Computer.
+* `Silo:` Manages the data on a Link.
