@@ -1,7 +1,18 @@
 {
-    "extends": "google",
+    "extends": "eslint:recommended",
     "rules": {
-    	"spaced-comment": 0,
-    	"no-multi-spaces": 0
+      "no-console": 0
+    },
+    "env": {
+        "es6": true,
+        "node": true,
+        "browser": true
+    },
+    "parserOptions": {  
+      "sourceType": "module"
+    },
+    "globals": {
+      "GLOBAL_VARS": true
     }
+    
 }

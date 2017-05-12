@@ -1,48 +1,154 @@
-# Cortex-HTML5-Base
+# LinkNYC Starter Bundle
 
-A skeleton HTML5 application built for Cortex.
+An HTML5 application built for LinkNYC.   
+This starter bundle will provide the necessary tools to build and develop content & creative on a Link.    
+With this bundle you will have the ability to test locally and package for production.
 
-## Project Dependencies
+## Bundle Dependencies
 
 ```
 $ npm install
 ```
 
-## Project Setup
-The HTML5 application is set up to run in two environments: development and production.
+## Bundle Structure
+```
++-- _build
+|   +-- _images
+|   +----- placeholder.jpg
+|   +-- _scripts
+|   +----- _cortex
+|   +--------- ajax.js
+|   +--------- data.js
+|   +--------- events.js
+|   +--------- logger.js
+|   +--------- placeholder.js
+|   +--------- simulator.js
+|   +--------- tracker.js
+|   +----- main.js
+|   +----- test-data.js
+|   +----- view.js
+|   +-- _styles
+|   +----- _css
+|   +--------- global.css
+|   +--------- normalize.css
+|   +----- _fonts
+|   +-- bundle.js
+|   +-- index.html
++-- _dist
+|   +-- ${APP-NAME}-${Date-Time-Stamp}.zip
++-- _node_modules
++-- _src
+|   +-- _images
+|   +----- placeholder.jpg
+|   +-- _scripts
+|   +----- _cortex
+|   +--------- ajax.js
+|   +--------- data.js
+|   +--------- events.js
+|   +--------- logger.js
+|   +--------- placeholder.js
+|   +--------- simulator.js
+|   +--------- tracker.js
+|   +----- main.js
+|   +----- test-data.js
+|   +----- view.js
+|   +-- _styles
+|   +----- _css
+|   +--------- global.css
+|   +--------- normalize.css
+|   +----- _fonts
+|   +-- bundle.js
+|   +-- index.html
++-- .eslintrc.json
++-- .gitignore
++-- Makefile
++-- package.json
++-- README.md
++-- webpack.config.js
++-- webpack.settings.js
+```
+- `./src/`: The src folder contains a structure for all your project files and assets. All your files should be stored in this folder. When the bundle is deployed, these files are copied to the `./build/` folder and zipped in the `./dist/` folder.
+- `./src/scripts/`: All your JS files should be stored in this folder. `src/scripts/main.js` is the entry point. All source files will get compiled into `./build/bundle.js` by webpack.
+- `./src/scripts/cortex`: All Cortex player JS files are stored in this folder. These files should never be edited and are the JS core of the starter bundle.
+- `./src/styles/`: Contains CSS files and CSS related files such as fonts. You can include the CSS files under this folder by requiring them in JavaScript. See `src/scripts/view.js` for an example.
+- `./src/images/`: All image file assets under this directory will get copied to the final HTML5 app directory.
+- `./src/build/`: The build folder is where your src files will be copied and prepped for packaging.
+- `./src/dist/`: The dist folder is where your production zip will be packaged and stored.
+- `index.html` is the default html file for your app. You can put your app skeleton in this file or dynamically create the DOM elements in JavaScript.
+- `.eslintrc.json` is used to define any eslint rules and global variable exceptions.
+- `webpack.settings.js` is used to store global variables used in the app.
+
+#### Placeholder Image
+The placeholder image is displayed on initial view of your creative and when there is an error within your code.   
+The image is located in the `./src/images/` folder and can be changed by replacing the file `./src/images/placeholder.jpg`.   
+**Note: It is recommended that your placeholder image differs from your creative for debugging.**
+
+#### Silo
+Silo manages data on a Link, providing campaigns access to the latest data stored.  When you make a change to campaign data,    
+Silo synchronizes in real time resulting in always up to the date data in your creative.   
+When developing locally or offline from an internet connection, data will be simulated from within the bundle at `./src/test-data.js`.    
+**Note: To simulate data correctly, data should be copied directly from your dataset in Silo.**
+
+### App Settings
+All global app setting variables are handled in `./webpack.settings.js`.
+
+* `appName` is used for logging messages within the app.
+* `campaign` tracks the campaign name in the tracking report.
+* `datasetID` references the production data in Silo to be used in the bundle.
+* `placeholderID` maps the DOM element ID for the placeholder image.
+
+### App Events
+* `VISIBLE_EVENT` fires when your app is about to become visible on screen.
+* `HIDDEN_EVENT` fires when your app is off screen or in the background.
+* `READY_EVENT` fires when the cortex player is ready and loaded.   
+ The view of your app will be created and any silo data will be loaded.  
+
+### App Methods
+Update `src/scripts/view.js` to handle data updates and event based updates.
+
+* `View.setData()` called when the app receives a `HIDDEN_EVENT`, good for manipulating incoming data or preloading images.
+* `View._render()` called when the app receives a `HIDDEN_EVENT`.
+* `View.updateView()` called when the app receives a `VISIBLE_EVENT`, good for updating the screen right before the app gets displayed.
 
 ### Local Development
-You can test and run your code locally using webpack-dev-server. This runs your code in memory using simulation mode and will watch for any JS changes in your application. In simulation mode, the app will fire Cortex events
-periodically and use the test data stored in `./src/test-data.js`. You can access your app in a web browser at `http://localhost:8080/`.
+You can test and run your code locally using `$ npm start`, leveraging webpack-dev-server to run your code in memory.     
+In local development mode JS and CSS changes will be watched and auto reloaded but any HTML changes will have to be manually reloaded.     
+Any silo data will be simulated from `./src/test-data.js`, with all events firing as they would in production.    
+You can access your app in a web browser at `http://localhost:8080/`.
 
 ### Development Mode
-The final HTML5 application will be saved under `./build`. The app will start in simulation mode. Open `./build/index.html`
-in your browser to run the app.  This mode is useful for quickly building the UI and viewing the final folder structure. **Note, you will have to rebuild after any code changes.**
+You can build your code in development mode using `$ npm run dev`, this will build the app to the `./build` folder.   
+Open `./build/index.html` in your browser to run the app.   
+This mode is useful for quickly building the UI and viewing the final folder structure.   
+**Note: You will have to rebuild after any code changes and all your data from silo will be local data.**
 
 ### Production Mode
-Similar to the development mode, the final HTML5 application will be saved under `./build`. However, you can build a final
-zip file as well by running `make dist`. The final zip will be located in `./dist/`. **The application will only work on Cortex player.**
+You can build your code in production mode using `$ npm run prod`, this will build the app to the `./build` folder.   
+To package for the Ad Server you will need to zip the `./build` folder for trafficking to a Link.   
+You can automatically package the `./build` folder using `$ make dist`, this will zip your code to the `./dist` folder.   
+**Note: The zipped bundle and files in the `./build` folder will only work on a Link.**
 
-### File Structure
-- `./src/`: Source files. The src folder contains a structure for all your project files and assets. All your files should be stored in this folder.
-- `./src/scripts/`: All your JS files should be stored in this folder. `src/scripts/main.js` is the entry point. All source files will get compiled into `./build/bundle.js` by webpack.
-- `./src/styles/`: Contains CSS files and CSS related files such as fonts. You can include the CSS files under this folder by requiring them in JavaScript. See `src/scripts/main.js` for an example.
-- `./src/images/`: All image file assets under this directory will get copied to the final HTML5 app directory.
-- `index.html` is the default html file for your app. You can put your app skeleton in this file or dynamically create the DOM elements in JavaScript.
+### Testing
+Creatives can be tested locally in local development mode to verify: correct design & visual content, silo data and events firing properly.   
+If you have access to an SBC, you can test an end to end experience by registering your sbc and trafficking your creative through the ad server.    
+**Note: Even with an SBC its recommended that you test on an actual Link to ensure proper serving, displaying and optimization of your creative in a production environment.**
 
-### Customizing the App
-* Change the app name in `package.json`. We use the app name in log messages.
-* Change the `DATASET_ID` in `src/scripts/main.js` to the production dataset id.
-* Update `src/scripts/test-data.js` with the test data. Make sure the test data is similar to the production data.
-* Update the placeholder view in `src/scripts/cortex/placeholder.js`. Current implementation loads path to your `placeholder.jpg image`. You can simply replace this image with your version or update `src/scripts/cortex/placeholder.js` to create custom DOM elements.
-* Update `src/scripts/view.js` to handle data updates and rendering.
-  * Update View.setData() if you need to manipulate the incoming data or preload images.
-  * Update View._render() to present the data on screen.
-  * Update View.updateView() if you need to update the screen right before the app gets displayed.
-* Build the app in production mode and deploy.
+### Approved Animation Support
+| Animation        | Status           | Notes  |
+| ------------- |:-------------:| -----:|
+| Fade-In      | ✅ | Simple opacity manipulation. |
+| Bounce |  ✅    |  'Bouncing' an element using complex keyframe movements is possible.   |
+| Rotate      |✅  | Transforming using `rotate3d` yields much better results than `rotate`. |
+| Carousel-fade    | ✅      |   Simple opacity manipulation. |
+
+### Link Information
+* The time format on a Link is in UTC.
+* To make external requests from a HTML5 bundle on a Link,    
+you have to either whitelist all routes or leverage Silo.
+* Currently 1080P video is supported on a Link in MP4 format.
 
 ### Quick commands
-* Run app locally (Dev mode)
+* Run app locally (local dev mode)
 ```
 $ npm start
 ```
@@ -58,3 +164,13 @@ $ npm run prod
 ```
 $ make dist
 ```
+OR
+```
+$ make dist-custom app=${YOUR_CUSTOM_APP_NAME}
+```
+
+### Appendix
+* `Cortex:` Player on Link.
+* `Vistar:` Ad Server.
+* `SBC:` Single Board Computer.
+* `Silo:` Manages the data on a Link.

@@ -1,7 +1,7 @@
 {
   "name": "linkNYC-starter-bundle",
   "version": "1.0.0",
-  "description": "Base HTML5 application to be run on Cortex player",
+  "description": "HTML5 starter application to be run on LinkNYC",
   "main": "index.js",
   "scripts": {
     "start": "node node_modules/.bin/webpack-dev-server --define process.env.NODE_ENV='\"development\"' --hot --inline --open --progress --colors --bail --content-base src",
@@ -12,7 +12,7 @@
     "type": "git",
     "url": "git://"
   },
-  "authors": "Hamza Kaya, Rodney Jean-Baptiste",
+  "authors": "Hamza Kaya, Rodney Jean-Baptiste, Alexander Jones",
   "license": "ISC",
   "babel": {
     "presets": [
@@ -29,7 +29,7 @@
     "css-loader": "^0.28.0",
     "eslint": "^3.19.0",
     "eslint-config-google": "^0.7.1",
-    "eslint-loader": "^1.7.1",
+    "eslint-loader": "^1.6.1",
     "file-loader": "^0.11.1",
     "q": "^1.5.0",
     "style-loader": "^0.16.1",
@@ -38,7 +38,7 @@
     "webpack-dev-server": "^1.16.3"
   },
   "dependencies": {
-    "moment": "^2.18.1",
+    "json-loader": "^0.5.4",
     "promise": "^7.1.1"
   }
 }

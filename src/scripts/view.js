@@ -1,25 +1,20 @@
-/* global window */
-/* eslint-disable no-unused-vars */
-
 require('../styles/css/global.css');
-
 import Placeholder from './cortex/placeholder.js';
 import Logger from './cortex/logger.js';
-
 import Tracker from './cortex/tracker.js';
-
-// TODO: Change this.
-const CAMPAIGN = 'com.intersection.starter';
 
 class View {
   constructor() {
     this.placeholder = new Placeholder();
-
     this.rows = [];
     this.deviceId = '';
+    this.productionEnv = process.env.NODE_ENV !== 'development';
 
     this.creativeContainer = window.document.getElementById(
 		'creativeContainer');
+
+    this.creativeContainerDebugger = window.document.getElementById(
+    'creativeContainer-debugger');
 
     this.fnRandomImage = function(min, max) {
       return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -58,11 +53,12 @@ class View {
    *   img.className = 'visible';
    * }
    *
-   * TODO: Implement this method according to your needs.
    *
    * @param {array} data The data rows.
+   *
    */
   setData(data) {
+    // Verify that the data matches Silo structure.
     this.rows = data;
 
     if (data && data.length > 0) {
@@ -74,17 +70,18 @@ class View {
    * Render the placeholder or the main view.
    *
    * Every time the app receives a 'hidden' event this method will get called.
+   *
    */
   render() {
     Logger.log('Rendering a new view.');
-    if (this.rows === null || this.rows.length === 0) {
-      Tracker.track(this.deviceId, CAMPAIGN, 'not tracked');
+    if (!window.document.getElementById(GLOBAL_VARS.placeholderID)) {
       this.placeholder.render();
-      return;
     }
 
-    this.placeholder.hide();
-    Tracker.track(this.deviceId, CAMPAIGN, 'tracked');
+    if (this.productionEnv) {
+      Tracker.track(this.deviceId, GLOBAL_VARS.campaign, 'tracked');
+    }
+
     this._render();
   }
 
@@ -101,10 +98,8 @@ class View {
    * this method when you need to perform some actions right before the view
    * becomes visible on the screen.
    *
-   * TODO: Implement this method according to your needs.
    */
   updateView() {
-    // For this app, we don't need to do anything.
   }
 
   /**
@@ -121,12 +116,13 @@ class View {
    * make as few DOM manipulations as possible. Reusing DOM elements is better
    * than recreating them every time this method is called.
    *
-   * TODO: Implement this method according to your needs.
    */
   _render() {
     this.creativeContainer.style.display = 'block';
     if (this.rows === null || this.rows.length === 0) {
       return;
+    }else{
+      this.placeholder.hide();
     }
 
     Logger.log(`The view has ${this.rows.length} data rows.`);

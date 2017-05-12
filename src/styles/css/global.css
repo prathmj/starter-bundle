@@ -2,14 +2,14 @@
   font-family: "SourceSansPro-Bold";
   font-style: normal;
   font-weight: 500;
-  src: url("../fonts/source-sans-pro/SourceSansPro-Bold.otf") format("opentype"); 
+  src: url("../fonts/source-sans-pro/SourceSansPro-Bold.otf") format("opentype");
 }
 
 @font-face {
   font-family: "SourceSansPro-Light";
   font-style: normal;
   font-weight: 200;
-  src: url("../fonts/source-sans-pro/SourceSansPro-Light.otf") format("opentype"); 
+  src: url("../fonts/source-sans-pro/SourceSansPro-Light.otf") format("opentype");
 }
 
 .hide {
@@ -19,9 +19,14 @@
 #content {
   font-size: 16px;
   letter-spacing: 0;
-} 
+}
+
+body {
+  margin: 0;
+}
 
 .creativeContainer {
+  position: relative;
   width: 1080px;
   height: 1920px;
   padding: 75px;
@@ -49,6 +54,32 @@
   margin-bottom: 32px;
 }
 
+.creativeContainer-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 1080px;
+  height: 60px;
+  background-color: #fff;
+  font-family: "SourceSansPro-Bold";
+  color: #3598db;
+  font-size: 60px;
+  line-height: 60px;
+}
+
+.creativeContainer-debugger {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1080px;
+  height: 60px;
+  background-color: #fff;
+  font-family: "SourceSansPro-Bold";
+  color: #3598db;
+  font-size: 60px;
+  line-height: 60px;
+}
+
 .placeholder {
   position: absolute;
   top: 0;
@@ -60,4 +91,3 @@
 .placeholder.invisible {
   opacity: 0;
 }
-

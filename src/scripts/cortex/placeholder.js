@@ -1,8 +1,4 @@
-/* global window */
-
 import Logger from './logger.js';
-
-const PLACEHOLDER_ID = 'placeholder';
 
 class Placeholder {
   constructor() {
@@ -20,7 +16,6 @@ class Placeholder {
    * The view generated will get hidden once the data arrives using the
    * Placeholder.hide() method.
    *
-   * TODO: Implement this method according to your needs.
    */
   render() {
     Logger.log('Rendering the placeholder image.');
@@ -31,12 +26,17 @@ class Placeholder {
       console.error("Failed to load the placeholder image: ", e);
     };
 
-    const div = window.document.createElement('div');
-    div.id = PLACEHOLDER_ID;
-    div.className = 'placeholder';
-    div.appendChild(img);
+    if (!this.placeholderDiv) {
+      const div = window.document.createElement('div');
+      div.id = GLOBAL_VARS.placeholderID;
+      div.className = 'placeholder';
+      div.appendChild(img);
 
-    window.document.body.appendChild(div);
+      window.document.body.appendChild(div);
+      this.placeholderDiv = window.document.getElementById(GLOBAL_VARS.placeholderID);
+    }else if (this.placeholderDiv) {
+      this.placeholderDiv.className = 'placeholder';
+    }
   }
 
   /**
@@ -45,7 +45,6 @@ class Placeholder {
    * This method gets called when the app receives data and the placeholder
    * is no longer needed.
    *
-   * TODO: Implement this method according to your needs.
    */
   hide() {
     if (this.hidden) {
@@ -54,11 +53,16 @@ class Placeholder {
     }
 
     Logger.log('Hiding the placeholder image.');
-
-    const div = window.document.getElementById(PLACEHOLDER_ID);
-    div.className = 'placeholder invisible';
-
+    this.placeholderDiv.className = 'placeholder invisible';
     this.hidden = true;
+  }
+
+  show() {
+    if (!this.hidden) return;
+
+    Logger.log('Showing the placeholder image.');
+    this.placeholderDiv.className = 'placeholder';
+    this.hidden = false;
   }
 }
 

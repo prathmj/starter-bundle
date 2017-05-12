@@ -1,5 +1,3 @@
-/* global window */
-
 import View from './view.js';
 import Data from './cortex/data.js';
 import Simulator from './cortex/simulator.js';
@@ -7,20 +5,16 @@ import Logger from './cortex/logger.js';
 import {READY_EVENT} from './cortex/events.js';
 
 /**
- TODO: Update this with your production dataset id.
-*/
-const DATASET_ID = 'com.intersection.starter';
-
-/**
  * Starts the app in simulation mode.
  *
  * This function will get called only when the NODE_ENV variable is set to
- * 'development'. Check out package.json to see how we set this variable.
+ * 'development'.
  *
- * In simulation mode, the app is expected to run on non-Cortex environments.
- * The Simulator will dispatch all necessary Cortex events. It will also
+ * In simulation mode, the app is expected to run on non-production environments.
+ * The Simulator will dispatch all necessary events. It will also
  * periodically dispatch the data stored in './test-data.js'. You can update
  * the event dispatch times in './data.js'.
+ *
  */
 function simulateCortexEnvironment() {
   const simulator = new Simulator();
@@ -32,6 +26,7 @@ function simulateCortexEnvironment() {
  *
  * Creates the View and Data instances. Enters the simulation mode in dev
  * environment.
+ *
  */
 function main() {
   const view = new View();
@@ -40,7 +35,7 @@ function main() {
   window.addEventListener(READY_EVENT, () => {
     Logger.log('Received the cortex-ready event.');
 
-    const data = new Data(DATASET_ID, view);
+    const data = new Data(GLOBAL_VARS.datasetID, view);
     data.init();
   });
 
