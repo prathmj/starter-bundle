@@ -17,14 +17,6 @@ cd starter-bundle
 npm install
 ```
 
-## Run locally
-
-To run the bundle locally, simply run
-```bash
-npm start
-```
-Your browser should open to 'http://localhost:8080/'
-
 ## Bundle Structure
 ```
 +-- _build
@@ -107,6 +99,12 @@ Link also provides an offline data store, Silo. Silo manages distributing datase
 When developing locally or offline from an internet connection, data will be simulated from within the bundle at `./src/test-data.js`.    
 **Note: To simulate data correctly, data should be copied directly from your dataset in Silo.**
 
+### App Events
+* `VISIBLE_EVENT` fires when your app is about to become visible on screen.
+* `HIDDEN_EVENT` fires when your app is off screen or in the background.
+* `READY_EVENT` fires when the cortex player is ready and loaded.   
+ The view of your app will be created and any silo data will be loaded.  
+
 ### App Settings
 All global app setting variables are handled in `./webpack.settings.js`.
 
@@ -114,12 +112,6 @@ All global app setting variables are handled in `./webpack.settings.js`.
 * `campaign` tracks the campaign name in the tracking report.
 * `datasetID` references the production data in Silo to be used in the bundle.
 * `placeholderID` maps the DOM element ID for the placeholder image.
-
-### App Events
-* `VISIBLE_EVENT` fires when your app is about to become visible on screen.
-* `HIDDEN_EVENT` fires when your app is off screen or in the background.
-* `READY_EVENT` fires when the cortex player is ready and loaded.   
- The view of your app will be created and any silo data will be loaded.  
 
 ### App Methods
 Update `src/scripts/view.js` to handle data updates and event based updates.
