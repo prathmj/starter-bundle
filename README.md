@@ -3,11 +3,27 @@
 This starter bundle will provide the necessary tools to build and develop content & creative on a Link.    
 With this bundle you will have the ability to test locally and package for production.
 
-## Bundle Dependencies
+## Set up bundle for local development
 
+1. Download and install Nodejs (https://nodejs.org) on your system
+2. Download our started bundle
+```bash
+git  clone https://github.com/LinkNYC/starter-bundle.git
 ```
-$ npm install
+
+3. Move to our starter-bundle and install necessary packages
+```bash
+cd starter-bundle
+npm install
 ```
+
+## Run locally
+
+To run the bundle locally, simply run
+```bash
+npm start
+```
+Your browser should open to 'http://localhost:8080/'
 
 ## Bundle Structure
 ```
@@ -67,15 +83,12 @@ $ npm install
 +-- webpack.settings.js
 ```
 - `./src/`: The src folder contains a structure for all your project files and assets. All your files should be stored in this folder. When the bundle is deployed, these files are copied to the `./build/` folder and zipped in the `./dist/` folder.
-- `./src/scripts/`: All your JS files should be stored in this folder. `src/scripts/main.js` is the entry point. All source files will get compiled into `./build/bundle.js` by webpack.
+- `./src/scripts/`: All your JS files should be stored in this folder. `src/scripts/main.js` is the entry point for our starter-bundle application
+- `./src/scripts/view.js`: Contains method handlers for app events. See [App Methods](#app-methods)
 - `./src/scripts/cortex`: All Cortex player JS files are stored in this folder. These files should never be edited and are the JS core of the starter bundle.
 - `./src/styles/`: Contains CSS files and CSS related files such as fonts. You can include the CSS files under this folder by requiring them in JavaScript. See `src/scripts/view.js` for an example.
 - `./src/images/`: All image file assets under this directory will get copied to the final HTML5 app directory.
-- `./src/build/`: The build folder is where your src files will be copied and prepped for packaging.
-- `./src/dist/`: The dist folder is where your production zip will be packaged and stored.
 - `index.html` is the default html file for your app. You can put your app skeleton in this file or dynamically create the DOM elements in JavaScript.
-- `.eslintrc.json` is used to define any eslint rules and global variable exceptions.
-- `webpack.settings.js` is used to store global variables used in the app.
 
 #### Placeholder Image
 The placeholder image is displayed on initial view of your creative and when there is an error within your code.   
@@ -88,7 +101,7 @@ Link Creatives are HTML5/Javascript applications and thus can pull dynamic data 
 * There is no persistence in Link web content
 * All external calls must be whitelisted - please contact Ad Operations who can help you with this procedure
 
-#### Offline Data Distribution
+### Offline Data Distribution
 Link also provides an offline data store, Silo. Silo manages distributing datasets across a fleet of Link, providing campaigns access to the latest data stored.  When you make a change to campaign data, Silo synchronizes in real time resulting in always up to the date data in your creative.
 
 When developing locally or offline from an internet connection, data will be simulated from within the bundle at `./src/test-data.js`.    
