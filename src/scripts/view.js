@@ -14,15 +14,9 @@ class View {
 		'creativeContainer');
 
     this.creativeContainerDebugger = window.document.getElementById(
-    'creativeContainer-debugger');
-
-    this.span_latitude = window.document.getElementById('latitude');
-    this.span_longitude = window.document.getElementById('longitude');
-
-    this.fnRandomImage = function(min, max) {
-      return Math.floor(Math.random() * (max - min + 1)) + min;
-    };
-  }
+		'creativeContainer-debugger');
+  };
+}
 
   /**
    * Set the incoming data from Silo.
@@ -132,10 +126,12 @@ class View {
 
     const row = this.rows.find(obj => obj._device_id === "d-b26db606-0583-45cc-725c-bb74e5d27185");
 
-    this.span_latitude.innerHTML = row.latitude;
-    this.span_longitude.innerHTML = row.longitude;
-
+    var locationData = window.document.querySelectorAll('.location-data');
+    locationData.forEach(function(item, index) {
+      locationData[index].innerHTML = locationData[index].id + ": " + row[item.id];
+    });
   }
+
 }
 
 module.exports = View;
