@@ -32,3 +32,19 @@ dist: clean build pack
 
 dist-custom: clean build custom-pack
 
+dev-packer:
+	mkdir -p ./dist
+	zip -r app_`date -u +"%Y-%m-%dT%H:%M:%SZ"`.zip * . && \
+	cp app_*.zip ./dist && \
+	rm app_*.zip
+
+dev-packer-custom:
+	mkdir -p ./dist
+	zip -r $(app)_`date -u +"%Y-%m-%dT%H:%M:%SZ"`.zip * . && \
+	cp $(app)_*.zip ./dist && \
+	rm $(app)_*.zip
+
+dev-dist: clean lint dev-packer
+
+dev-dist-custom: clean lint dev-packer-custom
+
