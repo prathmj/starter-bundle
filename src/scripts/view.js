@@ -7,7 +7,7 @@ class View {
   constructor() {
     this.placeholder = new Placeholder();
     this.rows = [];
-    this.deviceId = '';
+    this.deviceId = 'd-b26db606-0583-45cc-725c-bb74e5d27185';
     this.productionEnv = process.env.NODE_ENV !== 'development';
 
     this.creativeContainer = window.document.getElementById(
@@ -15,6 +15,9 @@ class View {
 
     this.creativeContainerDebugger = window.document.getElementById(
     'creativeContainer-debugger');
+
+    this.span_latitude = window.document.getElementById('latitude');
+    this.span_longitude = window.document.getElementById('longitude');
 
     this.fnRandomImage = function(min, max) {
       return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -127,14 +130,11 @@ class View {
 
     Logger.log(`The view has ${this.rows.length} data rows.`);
 
-    const row = this.rows;
+    const row = this.rows.find(obj => obj._device_id === "d-b26db606-0583-45cc-725c-bb74e5d27185");
 
-    const objImageRange = {
-      min: 0,
-      max: row.length - 1
-    };
+    this.span_latitude.innerHTML = row.latitude;
+    this.span_longitude.innerHTML = row.longitude;
 
-    this.creativeContainer.style.backgroundImage = 'url("' + row[this.fnRandomImage(objImageRange.min, objImageRange.max)].url + '")';
   }
 }
 
