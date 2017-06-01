@@ -15,8 +15,7 @@ class View {
 
     this.creativeContainerDebugger = window.document.getElementById(
 		'creativeContainer-debugger');
-  };
-}
+  }
 
   /**
    * Set the incoming data from Silo.
