@@ -102,7 +102,7 @@ Link Creatives are HTML5/Javascript applications and thus can pull dynamic data 
 ### Offline Data Distribution
 Link also provides an offline data store, Silo. Silo manages distributing datasets across a fleet of Link, providing campaigns access to the latest data stored.  When you make a change to campaign data, Silo synchronizes in real time resulting in always up to the date data in your creative.
 
-When developing locally or offline from an internet connection, data will be simulated from within the bundle at `./src/test-data.js`.    
+When developing locally or offline, data will be simulated from within the bundle at `./src/test-data.js`.    
 **Note: To simulate data correctly, data should be copied directly from your dataset in Silo.**
 
 ### App Events

@@ -10,11 +10,8 @@ class View {
     this.deviceId = '';
     this.productionEnv = process.env.NODE_ENV !== 'development';
 
-    this.creativeContainer = window.document.getElementById(
-		'creativeContainer');
-
-    this.creativeContainerDebugger = window.document.getElementById(
-    'creativeContainer-debugger');
+    this.creativeContainer = window.document.getElementById('creativeContainer');
+    this.creativeContainerDebugger = window.document.getElementById('creativeContainer-debugger');
 
 
     // -- D --------------------------------------------------------------------
@@ -133,12 +130,11 @@ class View {
 
     Logger.log(`The view has ${this.rows.length} data rows.`);
 
-    const row = this.rows;
 
     // -- F --------------------------------------------------------------------
     const objImageRange = {
       min: 0,
-      max: row.length - 1
+      max: this.rows.length - 1
     };
 
     this.creativeContainer.style.backgroundImage = 'url("' + row[this.fnRandomImage(objImageRange.min, objImageRange.max)].url + '")';
