@@ -16,6 +16,10 @@ class View {
     this.creativeContainerDebugger = window.document.getElementById(
     'creativeContainer-debugger');
 
+
+    // -- D --------------------------------------------------------------------
+    // -------------------------------------------------------------------------
+
     this.fnRandomImage = function(min, max) {
       return Math.floor(Math.random() * (max - min + 1)) + min;
     };
@@ -100,6 +104,8 @@ class View {
    *
    */
   updateView() {
+  // -- E --------------------------------------------------------------------
+  // -------------------------------------------------------------------------
   }
 
   /**
@@ -129,12 +135,14 @@ class View {
 
     const row = this.rows;
 
+    // -- F --------------------------------------------------------------------
     const objImageRange = {
       min: 0,
       max: row.length - 1
     };
 
     this.creativeContainer.style.backgroundImage = 'url("' + row[this.fnRandomImage(objImageRange.min, objImageRange.max)].url + '")';
+    // -------------------------------------------------------------------------
   }
 }
 
