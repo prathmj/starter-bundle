@@ -29,7 +29,7 @@ body {
   position: relative;
   width: 1080px;
   height: 1920px;
-  padding: 75px;
+  /* padding: 75px; */
   font-family: Arial;
   color: #fff;
   box-sizing: border-box;
@@ -90,4 +90,13 @@ body {
 
 .placeholder.invisible {
   opacity: 0;
+}
+
+.adj_img {
+  display:block;
+  height: 100%;
+  width: 100%;
+}
+.adj_img.hidden {
+  display:none;
 }

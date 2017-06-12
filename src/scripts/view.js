@@ -10,11 +10,10 @@ class View {
     this.deviceId = '';
     this.productionEnv = process.env.NODE_ENV !== 'development';
 
-    this.creativeContainer = window.document.getElementById(
-		'creativeContainer');
+    this.creativeContainer = window.document.getElementById('creativeContainer');
+    this.creativeContainerDebugger = window.document.getElementById('creativeContainer-debugger');
 
-    this.creativeContainerDebugger = window.document.getElementById(
-    'creativeContainer-debugger');
+    this.images = window.document.getElementsByClassName('adj_img');
   }
 
   /**
@@ -96,9 +95,24 @@ class View {
    *
    */
   updateView() {
+    const interval = 7.5 * 1000;
+    const imgs = this.images;
+
     setTimeout(function() {
-      this.creativeContainer.style.backgroundImage = 'url("' + "images/img2.png" + '")';
-    }, 15000);
+      console.log(imgs);
+      imgs[0].style.display = 'none';
+      imgs[1].style.display = 'block';
+    }, interval);
+
+    setTimeout(function() {
+      imgs[1].style.display = 'none';
+      imgs[2].style.display = 'block';
+    }, 2 * interval);
+
+    setTimeout(function() {
+      imgs[2].style.display = 'none';
+      imgs[3].style.display = 'block';
+    }, 3 * interval);
   }
 
   /**
@@ -126,7 +140,7 @@ class View {
 
     Logger.log(`The view has ${this.rows.length} data rows.`);
 
-    this.creativeContainer.style.backgroundImage = 'url("' + "images/img1.png" + '")';
+    // this.creativeContainer.style.backgroundImage = 'url("' + "images/img1.png" + '")';
   }
 }
 
