@@ -99,7 +99,6 @@ class View {
     const imgs = this.images;
 
     setTimeout(function() {
-      console.log(imgs);
       imgs[0].style.display = 'none';
       imgs[1].style.display = 'block';
     }, interval);
@@ -140,7 +139,7 @@ class View {
 
     Logger.log(`The view has ${this.rows.length} data rows.`);
 
-    // this.creativeContainer.style.backgroundImage = 'url("' + "images/img1.png" + '")';
+    this.images[0].style.display = 'block';
   }
 }
 

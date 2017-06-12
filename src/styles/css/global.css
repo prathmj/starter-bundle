@@ -93,10 +93,7 @@ body {
 }
 
 .adj_img {
-  display:block;
+  display: hidden;
   height: 100%;
   width: 100%;
-}
-.adj_img.hidden {
-  display:none;
 }
