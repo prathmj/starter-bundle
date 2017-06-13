@@ -87,6 +87,12 @@ The placeholder image is displayed on initial view of your creative and when the
 The image is located in the `./src/images/` folder and can be changed by replacing the file `./src/images/placeholder.jpg`.   
 **Note: It is strongly recommended that your placeholder image differs from your creative for debugging.**
 
+### Local Development
+You can test and run your code locally using `$ npm start`, leveraging webpack-dev-server to run your code in memory.     
+In local development mode JS and CSS changes will be watched and auto reloaded but any HTML changes will have to be manually reloaded.     
+Any silo data will be simulated from `./src/test-data.js`, with all events firing as they would in production.    
+You can access your app in a web browser at `http://localhost:8080/`.
+
 ### API Integration
 Link Creatives are HTML5/Javascript applications and thus can pull dynamic data or content directly from API's accessible from the internet. A few things to be aware of:
 
@@ -96,7 +102,7 @@ Link Creatives are HTML5/Javascript applications and thus can pull dynamic data 
 ### Offline Data Distribution
 Link also provides an offline data store, Silo. Silo manages distributing datasets across a fleet of Link, providing campaigns access to the latest data stored.  When you make a change to campaign data, Silo synchronizes in real time resulting in always up to the date data in your creative.
 
-When developing locally or offline from an internet connection, data will be simulated from within the bundle at `./src/test-data.js`.    
+When developing locally or offline, data will be simulated from within the bundle at `./src/test-data.js`.    
 **Note: To simulate data correctly, data should be copied directly from your dataset in Silo.**
 
 ### App Events
@@ -105,14 +111,6 @@ When developing locally or offline from an internet connection, data will be sim
 * `READY_EVENT` fires when the cortex player is ready and loaded.   
  The view of your app will be created and any silo data will be loaded.  
 
-### App Settings
-All global app setting variables are handled in `./webpack.settings.js`.
-
-* `appName` is used for logging messages within the app.
-* `campaign` tracks the campaign name in the tracking report.
-* `datasetID` references the production data in Silo to be used in the bundle.
-* `placeholderID` maps the DOM element ID for the placeholder image.
-
 ### App Methods
 Update `src/scripts/view.js` to handle data updates and event based updates.
 
@@ -120,11 +118,13 @@ Update `src/scripts/view.js` to handle data updates and event based updates.
 * `View._render()` called when the app receives a `HIDDEN_EVENT`.
 * `View.updateView()` called when the app receives a `VISIBLE_EVENT`, good for updating the screen right before the app gets displayed.
 
-### Local Development
-You can test and run your code locally using `$ npm start`, leveraging webpack-dev-server to run your code in memory.     
-In local development mode JS and CSS changes will be watched and auto reloaded but any HTML changes will have to be manually reloaded.     
-Any silo data will be simulated from `./src/test-data.js`, with all events firing as they would in production.    
-You can access your app in a web browser at `http://localhost:8080/`.
+### App Settings
+All global app setting variables are handled in `./webpack.settings.js`.
+
+* `appName` is used for logging messages within the app.
+* `campaign` tracks the campaign name in the tracking report.
+* `datasetID` references the production data in Silo to be used in the bundle.
+* `placeholderID` maps the DOM element ID for the placeholder image.
 
 ### Development Mode
 You can build your code in development mode using `$ npm run dev`, this will build the app to the `./build` folder.   
