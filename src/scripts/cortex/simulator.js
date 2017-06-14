@@ -3,10 +3,10 @@ import Logger from './logger.js';
 import {VISIBLE_EVENT, HIDDEN_EVENT, READY_EVENT} from './events.js';
 
 // Dispatch the cortex-ready event in 2secs.
-const DISPATCH_CORTEX_READY_TIME = 2000;
+const DISPATCH_CORTEX_READY_TIME = 5000;
 
-// Dispatch vistar-hidden event every 5secs.
-const DISPATCH_VISTAR_HIDDEN_INTERVAL = 5000;
+// Dispatch vistar-hidden event every 30secs.
+const DISPATCH_VISTAR_HIDDEN_INTERVAL = 30000;
 
 // Send data updates every 4 seconds.
 const DISPATCH_DATA_UPDATES_INTERVAL = 4000;

@@ -14,6 +14,15 @@ class View {
     this.creativeContainerDebugger = window.document.getElementById('creativeContainer-debugger');
 
     this.images = window.document.getElementsByClassName('adj_img');
+
+    const interval = 7.5 * 1000;
+
+    this.changeImageTimeout = function(i) {
+      setTimeout(() => {
+        this.images[i-1].style.display = 'none';
+        this.images[i].style.display = 'block';
+      }, i * interval);
+    };
   }
 
   /**
@@ -95,23 +104,10 @@ class View {
    *
    */
   updateView() {
-    const interval = 7.5 * 1000;
-    const imgs = this.images;
-
-    setTimeout(function() {
-      imgs[0].style.display = 'none';
-      imgs[1].style.display = 'block';
-    }, interval);
-
-    setTimeout(function() {
-      imgs[1].style.display = 'none';
-      imgs[2].style.display = 'block';
-    }, 2 * interval);
-
-    setTimeout(function() {
-      imgs[2].style.display = 'none';
-      imgs[3].style.display = 'block';
-    }, 3 * interval);
+    var i;
+    for (i=1; i <= this.images.length; i++) {
+      this.changeImageTimeout(i);
+    }
   }
 
   /**
