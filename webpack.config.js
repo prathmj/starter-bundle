@@ -12,7 +12,6 @@ module.exports = {
     filename: 'bundle.js'
   },
   devServer: {
-    outputPath: path.join(__dirname, 'build'),
     filename: 'bundle.js'
   },
   node: {
@@ -21,9 +20,6 @@ module.exports = {
     tls: 'empty'
   },
   module: {
-    preLoaders: [
-      {test: /\.js$/, loader: 'eslint-loader', exclude: /node_modules/}
-    ],
     loaders: [
       {
         test: /\.js$/,
@@ -44,7 +40,7 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['', '.js'],
+    extensions: ['.js'],
     alias: {
       settings: path.resolve(__dirname, './webpack.settings')
     }
@@ -69,6 +65,6 @@ module.exports = {
     new webpack.ProvidePlugin({
       GLOBAL_VARS: 'settings'
     }),
-    new webpack.NoErrorsPlugin()
+    new webpack.NoEmitOnErrorsPlugin()
   ]
 };
