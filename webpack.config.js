@@ -75,6 +75,6 @@ module.exports = {
     new webpack.ProvidePlugin({
       GLOBAL_VARS: 'settings'
     }),
-    new webpack.NoEmitOnErrorsPlugin(),
+    new webpack.NoEmitOnErrorsPlugin()
   ]
 };
