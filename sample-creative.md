@@ -2,13 +2,11 @@
 We'll start by creating a very simple creative that displays the current date and pulls in a 'national holiday' that falls on the same day.
 The four files we will be editing are 'index.html', 'test-data.js', 'view.js', and 'global.css'.
 
-Let's begin in 'index.html'. Find the div with an id named 'content' (in the 'creativeContainer' div). This is where our HTML for the creative is located. For our sample project, we'll only need to add two lines into this div:
+Let's begin in 'index.html'. Find the div with an id named 'content' (in the 'creativeContainer' div). This is where our HTML for the creative is located. For our sample project, we'll only need to add two lines into the content div:
 ```html
 <!-- A -------------------------------------------------------------->
-<div id="content">
-  <p id="date"></p>
-  <p id="holiday"></p>
-</div>
+<p id="date"></p>
+<p id="holiday"></p>
 <!------------------------------------------------------------------->
 ```
 This will give us a place to display our info.
@@ -79,9 +77,9 @@ Now we will pull in our Silo data. As it currently stands, a few background imag
 and replace it with out logic:
 ```javascript
     // -- F --------------------------------------------------------------------
-    this.holiday = this.rows.find(obj => obj.id === "9d286c0d-6b6f-4915-9f3d-ee8e762e204a1");
+    this.row = this.rows.find(obj => obj.id === "9d286c0d-6b6f-4915-9f3d-ee8e762e204a1");
 
     this.creativeContainerDate.innerHTML = "The date is: " + this.date.toDateString();
-    this.creativeContainerHoliday.innerHTML = "Today is " + this.holiday;
+    this.creativeContainerHoliday.innerHTML = "Today is " + this.row.holiday;
     // -------------------------------------------------------------------------
 ```
