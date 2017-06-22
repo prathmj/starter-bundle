@@ -20,22 +20,32 @@ module.exports = {
     tls: 'empty'
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
-        loader: 'eslint-loader!babel-loader',
+        enforce: 'pre',
+        loader: 'eslint-loader',
         exclude: /node_modules/
-      }, {
-        test: /\.css$/,
-        loader: 'style-loader!css-loader',
+      },
+      {
+        test: /\.js$/,
+        use: [
+              "eslint-loader",
+              "babel-loader"],
         exclude: /node_modules/
-      }, {
+      },
+      {
+          test: /\.css$/,
+          use: [
+                "style-loader",
+                "css-loader"],
+          exclude: /node_modules/
+      },
+      {
         test: /\.(png|jpg|gif|jpeg|otf|svg)$/,
-        loader: 'file-loader', exclude: /node_modules/,
-        query: {name: './[path][hash].[ext]'}
-      }, {
-        test: /\.json$/,
-        loader: 'json-loader'
+        loader: 'file-loader',
+        exclude: /node_modules/,
+        options: {name: './[path][hash].[ext]'}
       }
     ]
   },
@@ -65,6 +75,6 @@ module.exports = {
     new webpack.ProvidePlugin({
       GLOBAL_VARS: 'settings'
     }),
-    new webpack.NoEmitOnErrorsPlugin()
+    new webpack.NoEmitOnErrorsPlugin(),
   ]
 };
