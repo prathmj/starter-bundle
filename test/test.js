@@ -1,5 +1,10 @@
 import test from 'ava';
+import View from '../src/scripts/view.js';
 
-test('ava test example', t => {
-	t.pass();
+test('fnRandomImage is expected', t => {
+	const view = new View();
+	const result = view.fnRandomImage(0,1,0);
+	const expected = 0;
+
+	t.is(result, expected);
 });

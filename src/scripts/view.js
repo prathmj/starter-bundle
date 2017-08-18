@@ -16,8 +16,8 @@ class View {
     this.creativeContainerDebugger = window.document.getElementById(
     'creativeContainer-debugger');
 
-    this.fnRandomImage = function(min, max) {
-      return Math.floor(Math.random() * (max - min + 1)) + min;
+    this.fnRandomImage = function(min, max, rand) {
+      return Math.floor(rand * (max - min + 1)) + min;
     };
   }
 
@@ -131,10 +131,11 @@ class View {
 
     const objImageRange = {
       min: 0,
-      max: row.length - 1
+      max: row.length - 1,
+      rand: Math.random()
     };
 
-    this.creativeContainer.style.backgroundImage = 'url("' + row[this.fnRandomImage(objImageRange.min, objImageRange.max)].url + '")';
+    this.creativeContainer.style.backgroundImage = 'url("' + row[this.fnRandomImage(objImageRange.min, objImageRange.max, objImageRange.rand)].url + '")';
   }
 }
 
