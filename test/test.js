@@ -3,8 +3,8 @@ import View from '../src/scripts/view.js';
 
 test('fnRandomImage is expected', t => {
 	const view = new View();
-	const result = view.fnRandomImage(0,1,0);
+	const actual = view.fnRandomImage(0,1,0);
 	const expected = 0;
 
-	t.is(result, expected);
+	t.is(actual, expected);
 });
