@@ -3,6 +3,9 @@
 This starter bundle will provide the necessary tools to build and develop content & creative on a Link.    
 With this bundle you will have the ability to test locally and package for production.
 
+[![Code Climate](https://codeclimate.com/repos/599c344bde9e73028a0020fa/badges/24d55c13a3ebbf8b7e13/gpa.svg)](https://codeclimate.com/repos/599c344bde9e73028a0020fa/feed)
+[![Test Coverage](https://codeclimate.com/repos/599c344bde9e73028a0020fa/badges/24d55c13a3ebbf8b7e13/coverage.svg)](https://codeclimate.com/repos/599c344bde9e73028a0020fa/coverage)
+
 ## Bundle Dependencies
 
 ```
