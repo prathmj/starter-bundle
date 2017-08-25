@@ -148,6 +148,13 @@ Creatives can be tested locally in local development mode to verify: correct des
 If you have access to a Link SBC, you can test an end to end experience by registering your sbc and trafficking your creative through the ad server.    
 **Note: Even with an SBC its recommended that you test on an actual Link to ensure proper serving, displaying and optimization of your creative in a street environment.**
 
+### Update Code Climate Coverage Report:
+
+* Install Code Climate's NPM package: `npm install -g codeclimate-test-reporter`
+* Generate an lcov format coverage report: `nyc --reporter=lcov npm test`
+* Send lcov coverage data to Code Climate: `CODECLIMATE_REPO_TOKEN=<token> codeclimate-test-reporter < lcov.info`
+* Code Climate coverage will update on the next push or merge to the `master` branch
+
 ### Supported HTML5 Animation Operations
 | Animation        | Status           | Notes  |
 | ------------- |:-------------:| -----:|
