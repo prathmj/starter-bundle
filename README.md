@@ -3,6 +3,9 @@
 This starter bundle will provide the necessary tools to build and develop content & creative on a Link.    
 With this bundle you will have the ability to test locally and package for production.
 
+[![Code Climate](https://codeclimate.com/repos/599c344bde9e73028a0020fa/badges/24d55c13a3ebbf8b7e13/gpa.svg)](https://codeclimate.com/repos/599c344bde9e73028a0020fa/feed)
+[![Test Coverage](https://codeclimate.com/repos/599c344bde9e73028a0020fa/badges/24d55c13a3ebbf8b7e13/coverage.svg)](https://codeclimate.com/repos/599c344bde9e73028a0020fa/coverage)
+
 ## Bundle Dependencies
 
 ```
@@ -144,6 +147,13 @@ Unit testing is done using AVA (https://github.com/avajs/ava) with test coverage
 Creatives can be tested locally in local development mode to verify: correct design & visual content, silo data and events firing properly.   
 If you have access to a Link SBC, you can test an end to end experience by registering your sbc and trafficking your creative through the ad server.    
 **Note: Even with an SBC its recommended that you test on an actual Link to ensure proper serving, displaying and optimization of your creative in a street environment.**
+
+### Update Code Climate Coverage Report:
+
+* Install Code Climate's NPM package: `npm install -g codeclimate-test-reporter`
+* Generate an lcov format coverage report: `nyc --reporter=lcov npm test`
+* Send lcov coverage data to Code Climate: `CODECLIMATE_REPO_TOKEN=<token> codeclimate-test-reporter < lcov.info`
+* Code Climate coverage will update on the next push or merge to the `master` branch
 
 ### Supported HTML5 Animation Operations
 | Animation        | Status           | Notes  |
