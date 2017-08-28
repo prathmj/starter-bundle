@@ -3,9 +3,6 @@
 This starter bundle will provide the necessary tools to build and develop content & creative on a Link.    
 With this bundle you will have the ability to test locally and package for production.
 
-[![Code Climate](https://codeclimate.com/repos/599c344bde9e73028a0020fa/badges/24d55c13a3ebbf8b7e13/gpa.svg)](https://codeclimate.com/repos/599c344bde9e73028a0020fa/feed)
-[![Test Coverage](https://codeclimate.com/repos/599c344bde9e73028a0020fa/badges/24d55c13a3ebbf8b7e13/coverage.svg)](https://codeclimate.com/repos/599c344bde9e73028a0020fa/coverage)
-
 ## Bundle Dependencies
 
 ```
@@ -149,6 +146,9 @@ If you have access to a Link SBC, you can test an end to end experience by regis
 **Note: Even with an SBC its recommended that you test on an actual Link to ensure proper serving, displaying and optimization of your creative in a street environment.**
 
 ### Update Code Climate Coverage Report:
+
+[![Code Climate](https://codeclimate.com/repos/599c344bde9e73028a0020fa/badges/24d55c13a3ebbf8b7e13/gpa.svg)](https://codeclimate.com/repos/599c344bde9e73028a0020fa/feed)
+[![Test Coverage](https://codeclimate.com/repos/599c344bde9e73028a0020fa/badges/24d55c13a3ebbf8b7e13/coverage.svg)](https://codeclimate.com/repos/599c344bde9e73028a0020fa/coverage)
 
 * Install Code Climate's NPM package: `npm install -g codeclimate-test-reporter`
 * Generate an lcov format coverage report: `nyc --reporter=lcov npm test`
