@@ -38,11 +38,14 @@
   },
   "nyc": {
     "exclude": [
-      "node_modules"
+      "node_modules",
+      "coverage",
+      "test/helpers/*",
+      "test/test.js"
     ],
     "reporter": [
       "lcov",
-      "text-summary"
+      "text"
     ]
   },
   "devDependencies": {
