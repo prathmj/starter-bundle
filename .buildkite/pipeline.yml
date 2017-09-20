@@ -1,0 +1,13 @@
+---
+steps:
+    - command: 
+      - docker-compose -f .buildkite/docker-compose.buildkite.yml run starter-bundle 
+        npm install
+      - docker-compose -f .buildkite/docker-compose.buildkite.yml run starter-bundle 
+        npm test
+      - docker-compose -f .buildkite/docker-compose.buildkite.yml run
+        -e "CODECLIMATE_REPO_TOKEN=$CODECLIMATE_REPO_TOKEN"
+        starter-bundle
+        ./node_modules/.bin/codeclimate-test-reporter < coverage/lcov.info
+      agents:
+      - queue=link-aws-dev

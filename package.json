@@ -38,7 +38,14 @@
   },
   "nyc": {
     "exclude": [
-      "node_modules"
+      "node_modules",
+      "coverage",
+      "test/helpers/*",
+      "test/test.js"
+    ],
+    "reporter": [
+      "lcov",
+      "text"
     ]
   },
   "devDependencies": {
@@ -50,6 +57,7 @@
     "babel-register": "^6.26.0",
     "browser-env": "^3.1.2",
     "clean-webpack-plugin": "^0.1.16",
+    "codeclimate-test-reporter": "^0.5.0",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.28.4",
     "eslint": "^4.1.1",

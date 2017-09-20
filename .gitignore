@@ -6,6 +6,7 @@ dist/
 *.swo
 .DS_Store
 .nyc_output/
+coverage/
 
 # ignoring for now but should check this in
 package-lock.json
