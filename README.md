@@ -145,6 +145,21 @@ Creatives can be tested locally in local development mode to verify: correct des
 If you have access to a Link SBC, you can test an end to end experience by registering your sbc and trafficking your creative through the ad server.    
 **Note: Even with an SBC its recommended that you test on an actual Link to ensure proper serving, displaying and optimization of your creative in a street environment.**
 
+### Logging
+To log during local development, use the `Logger` module provide by cortex in the form of `Logger.log("my log")`. These log messages will display with a timestamp in the javascript console of your browser.   
+To log during production, you will first need an account with [Loggly](https://www.loggly.com) and to update `webpack.settings.js` with your credentials. Import the Loggly module from `./src/scripts/loggly.js` into `./src/scripts/view.js` and store an instance in the View class constructor. The loggly module has built in functionality for monitoring the lifecycle health of your application, but this is optional.
+
+#### Loggly Module Usage
+`Loggly.log(params)` - Custom logging   
+`Loggly.log(method, additionalParams)` - lifecycle health logging with optional additional params   
+`Loggly.setDevice(deviceId)` - Used along side the lifecycle health logging functionality. Called in the setData method with the Venue Id or Site ID returned from Silo.
+
+**parameters**
+* **params** - Accepts an object. Whatever is passed here will be exactly what you see in the [Loggly](https://www.loggly.com) logs.
+* **method** - Accepts 'setData', 'render', or 'updateView'. By default, this will log a lifecycle object. It's recommended that each method is logged if using this functionality.
+* **additionalParams** (Optional) - Accepts an object. Additional parameters to be sent along with the lifecycle object. 
+* **deviceId** - Accepts a string.
+
 ### Update Code Climate Coverage Report:
 
 [![Code Climate](https://codeclimate.com/repos/599c344bde9e73028a0020fa/badges/24d55c13a3ebbf8b7e13/gpa.svg)](https://codeclimate.com/repos/599c344bde9e73028a0020fa/feed)
