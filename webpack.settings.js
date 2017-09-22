@@ -7,8 +7,8 @@
 
 module.exports = {
   appName: JSON.stringify(require('./package.json').name),
-  campaign: '__replace__',
-  datasetID: '__replace__',
+  campaign: 'LinkNYC Starter Bundle',
+  datasetID: 'com.intersection.starter',
   logglyToken: '__replace__',
   logglyUsername: '__replace__',
   logglyPassword: '__replace__',

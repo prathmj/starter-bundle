@@ -1,3 +1,4 @@
+/* eslint-disable*/
 import Logger from './cortex/logger.js';
 import loggly from 'loggly';
 
@@ -19,27 +20,36 @@ class Loggly {
     });
   }
 
+  _setParams(method, args) {
+    let { lifecycle_id, lifecycles_without_reset, device_id } = this;
+    this.params = Object.assign({
+      method,
+      lifecycle_id,
+      lifecycles_without_reset,
+      device_id
+    }, args)
+  }
+
   setDevice(id) {
     this.device_id = id;
   }
 
   log(method, args) {
-    if (typeof method === 'object') {
-      this.params = method;
-    } else {
-      if (method === 'setData' || method === 'render') {
+    let _method = typeof method === 'object' ? 'custom' : method;
+    switch (_method) {
+      case 'custom':
+        this.params = method;
+        break;
+      case 'setData' || 'render':
         this.lifecycle_id = Date.now();
-      } else if (method === 'updateView') {
-      this.lifecycles_without_reset++;
-    }
-      let { lifecycle_id, lifecycles_without_reset, device_id } = this;
-      this.params = {
-        method,
-        lifecycle_id,
-        lifecycles_without_reset,
-        device_id,
-        ...args
-      }
+        this._setParams(method, args)
+        break;
+      case 'updateView':
+        this.lifecycles_without_reset++;
+        this._setParams(method, args)
+        break;
+      default:
+        return;
     }
 
     this.loggly.log(this.params, (err) => {
