@@ -35,28 +35,33 @@ class Loggly {
   }
 
   log(method, args) {
-    let _method = typeof method === 'object' ? 'custom' : method;
-    switch (_method) {
-      case 'custom':
-        this.params = method;
-        break;
-      case 'setData' || 'render':
-        this.lifecycle_id = Date.now();
-        this._setParams(method, args)
-        break;
-      case 'updateView':
-        this.lifecycles_without_reset++;
-        this._setParams(method, args)
-        break;
-      default:
-        return;
-    }
-
-    this.loggly.log(this.params, (err) => {
-      if (err) {
-        Logger.log(err)
+    try {
+      let _method = typeof method === 'object' ? 'custom' : method;
+      switch (_method) {
+        case 'custom':
+          this.params = method;
+          break;
+        case 'setData':
+        case 'render':
+          this.lifecycle_id = Date.now();
+          this._setParams(method, args)
+          break;
+        case 'updateView':
+          this.lifecycles_without_reset++;
+          this._setParams(method, args)
+          break;
+        default:
+          throw new SyntaxError("Loggly.log only accepts a custom object, 'setData', 'render', or 'updateView'")
       }
-    })    
+
+      this.loggly.log(this.params, (err) => {
+        if (err) {
+          Logger.log(err)
+        }
+      })
+    } catch (e) {
+      console.log(e)
+    }   
   }
 }
 
