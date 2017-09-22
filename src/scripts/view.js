@@ -2,7 +2,6 @@
 require('../styles/css/global.css');
 import Placeholder from './cortex/placeholder.js';
 import Logger from './cortex/logger.js';
-import Loggly from './loggly.js';
 import Tracker from './cortex/tracker.js';
 
 class View {
@@ -19,11 +18,11 @@ class View {
 
     this.creativeContainerDebugger = window.document.getElementById(
     'creativeContainer-debugger');
-
-    this.fnRandomImage = function(min, max, rand) {
-      return Math.floor(rand * (max - min + 1)) + min;
-    };
   }
+
+  fnRandomImage(min, max, rand) {
+      return Math.floor(rand * (max - min + 1)) + min;
+  };
 
   /**
    * Set the incoming data from Silo.
