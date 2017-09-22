@@ -5,11 +5,16 @@
     },
     "env": {
         "es6": true,
+
         "node": true,
         "browser": true
     },
     "parserOptions": {  
       "sourceType": "module"
+    },
+    "ecmaFeatures": {
+        "jsx": true,
+        "experimentalObjectRestSpread": true
     },
     "globals": {
       "GLOBAL_VARS": true
