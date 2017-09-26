@@ -147,7 +147,7 @@ If you have access to a Link SBC, you can test an end to end experience by regis
 
 ### Logging
 To log during local development, use the `Logger` module provide by cortex in the form of `Logger.log("my log")`. These log messages will display with a timestamp in the javascript console of your browser.   
-To log during production, you will first need an account with [Loggly](https://www.loggly.com) and to update `webpack.settings.js` with your credentials. Import the Loggly module from `./src/scripts/loggly.js` into `./src/scripts/view.js` and store an instance in the View class constructor. The loggly module has built in functionality for monitoring the lifecycle health of your application, but this is optional.
+To log during production, you will first need an account with [Loggly](https://www.loggly.com) and to update `webpack.settings.js` with your credentials. Import the Loggly module from `./src/scripts/loggly.js` into `./src/scripts/view.js` and instantiate the class in the View class constructor. The loggly module has built in functionality for monitoring the lifecycle health of your application, but this is optional.
 
 #### Loggly Module Usage
 `Loggly.log(params)` - Custom logging   
@@ -159,6 +159,11 @@ To log during production, you will first need an account with [Loggly](https://w
 * **method** - Accepts 'setData', 'render', or 'updateView'. By default, this will log a lifecycle object. It's recommended that each method is logged if using this functionality.
 * **additionalParams** (Optional) - Accepts an object. Additional parameters to be sent along with the lifecycle object. 
 * **deviceId** - Accepts a string.
+
+**examples**
+instantiate - `this.loggly = new Loggly()`
+custom logging - `loggly.log({myCustom: 'parameters', and: 'other things'})`
+lifecycle logging - `loggly.log('render');` & `loggly.log('updateView', {extra: 'things'})`
 
 ### Update Code Climate Coverage Report:
 
