@@ -60,7 +60,7 @@ class Loggly {
         }
       })
     } catch (e) {
-      console.log(e)
+      Logger.log(e)
     }   
   }
 }
