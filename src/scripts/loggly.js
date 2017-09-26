@@ -1,5 +1,4 @@
 /* eslint-disable*/
-import Logger from './cortex/logger.js';
 import loggly from 'loggly';
 import GLOBAL_VARS from '../../webpack.settings.js'
 
@@ -35,6 +34,14 @@ class Loggly {
     this.device_id = id;
   }
 
+  _log(params) {
+    this.loggly.log(this.params, (err) => {
+      if (err) {
+        console.log(err)
+      }
+    })
+  }
+
   log(method, args) {
     try {
       let _method = typeof method === 'object' ? 'custom' : method;
@@ -55,13 +62,9 @@ class Loggly {
           throw new TypeError("Loggly.log only accepts a custom object, 'setData', 'render', or 'updateView'")
       }
 
-      this.loggly.log(this.params, (err) => {
-        if (err) {
-          Logger.log(err)
-        }
-      })
+      this._log(this.params)
     } catch (e) {
-      return e
+      return (e)
     }   
   }
 }

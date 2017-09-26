@@ -2,6 +2,7 @@
 require('../styles/css/global.css');
 import Placeholder from './cortex/placeholder.js';
 import Logger from './cortex/logger.js';
+import Loggly from './loggly'
 import Tracker from './cortex/tracker.js';
 
 class View {
@@ -11,7 +12,7 @@ class View {
     this.deviceId = '';
     this.productionEnv = process.env.NODE_ENV !== 'development';
 
-    this.loggly = new Loggly();
+    this.log = new Loggly();
 
     this.creativeContainer = window.document.getElementById(
 		'creativeContainer');
@@ -77,7 +78,6 @@ class View {
    */
   render() {
     Logger.log('Rendering a new view.');
-    this.loggly.log({my: 'object'})
     if (!window.document.getElementById(GLOBAL_VARS.placeholderID)) {
       this.placeholder.render();
     }
@@ -104,7 +104,6 @@ class View {
    *
    */
   updateView() {
-    debugger;
   }
 
   /**

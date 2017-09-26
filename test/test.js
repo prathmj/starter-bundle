@@ -51,6 +51,10 @@ test('Loggly sets device ID', t => {
 })
 
 test('Loggly throws syntax error', t => {
-		const error = loggly.log('notALifecycleMethod');
-		t.is(error.message, "Loggly.log only accepts a custom object, 'setData', 'render', or 'updateView'")
-	})
+	const error = loggly.log('notALifecycleMethod');
+	t.is(error.message, "Loggly.log only accepts a custom object, 'setData', 'render', or 'updateView'")
+})
+
+test('Loggly logger handles error', t => {
+	console.log(loggly._log(null))
+})
