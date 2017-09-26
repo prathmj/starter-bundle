@@ -1,6 +1,6 @@
 /* eslint-disable*/
 import Logger from './cortex/logger.js';
-const loggly = require('loggly');
+import loggly from 'loggly';
 
 class Loggly {
   constructor() {
