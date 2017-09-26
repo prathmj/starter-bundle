@@ -30,16 +30,16 @@ class Loggly {
     }, args)
   }
 
-  setDevice(id) {
-    this.device_id = id;
-  }
-
   _log(params) {
     return new Promise((resolve, reject) => {
       this.loggly.log(this.params, (err) => {
         if (err) reject(err)
       })
     })
+  }
+
+  setDevice(id) {
+    this.device_id = id;
   }
 
   log(method, args) {
