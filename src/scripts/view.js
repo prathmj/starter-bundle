@@ -2,7 +2,6 @@
 require('../styles/css/global.css');
 import Placeholder from './cortex/placeholder.js';
 import Logger from './cortex/logger.js';
-import Loggly from './loggly'
 import Tracker from './cortex/tracker.js';
 
 class View {
@@ -11,8 +10,6 @@ class View {
     this.rows = [];
     this.deviceId = '';
     this.productionEnv = process.env.NODE_ENV !== 'development';
-
-    this.log = new Loggly();
 
     this.creativeContainer = window.document.getElementById(
 		'creativeContainer');
