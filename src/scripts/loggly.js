@@ -35,10 +35,10 @@ class Loggly {
   }
 
   _log(params) {
-    this.loggly.log(this.params, (err) => {
-      if (err) {
-        console.log(err)
-      }
+    return new Promise((resolve, reject) => {
+      this.loggly.log(this.params, (err) => {
+        if (err) reject(err)
+      })
     })
   }
 
@@ -63,8 +63,9 @@ class Loggly {
       }
 
       this._log(this.params)
-    } catch (e) {
-      return (e)
+        .catch(e => e)
+    } catch (error) {
+      return error
     }   
   }
 }

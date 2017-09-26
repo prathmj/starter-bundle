@@ -55,6 +55,8 @@ test('Loggly throws syntax error', t => {
 	t.is(error.message, "Loggly.log only accepts a custom object, 'setData', 'render', or 'updateView'")
 })
 
-test('Loggly logger handles error', t => {
-	console.log(loggly._log(null))
+test('Loggly logger handles API error', t => {
+	return loggly._log({}).catch(error => {
+		t.is(error.message, 'Loggly Error (403): Forbidden')
+	})
 })
