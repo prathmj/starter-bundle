@@ -1,3 +1,4 @@
+import GLOBAL_VARS from '../../../webpack.settings.js'
 class Logger {
   static log(msg, ...args) {
     if (args && args.length > 0) {

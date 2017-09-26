@@ -1,6 +1,7 @@
 /* eslint-disable*/
 import Logger from './cortex/logger.js';
 import loggly from 'loggly';
+import GLOBAL_VARS from '../../webpack.settings.js'
 
 class Loggly {
   constructor() {
@@ -51,7 +52,7 @@ class Loggly {
           this._setParams(method, args)
           break;
         default:
-          throw new SyntaxError("Loggly.log only accepts a custom object, 'setData', 'render', or 'updateView'")
+          throw new TypeError("Loggly.log only accepts a custom object, 'setData', 'render', or 'updateView'")
       }
 
       this.loggly.log(this.params, (err) => {
@@ -60,7 +61,7 @@ class Loggly {
         }
       })
     } catch (e) {
-      Logger.log(e)
+      return e
     }   
   }
 }
