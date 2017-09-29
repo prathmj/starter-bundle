@@ -3,8 +3,8 @@ import test from 'ava';
 import View from '../src/scripts/view.js';
 import Loggly from '../src/scripts/loggly.js';
 
-const nock = require('nock');
-const request = require('request');
+import nock from 'nock';
+import request from 'request';
 
 nock.disableNetConnect();
 
