@@ -1,4 +1,3 @@
-/*eslint-disable*/
 require('../styles/css/global.css');
 import Placeholder from './cortex/placeholder.js';
 import Logger from './cortex/logger.js';
@@ -20,7 +19,7 @@ class View {
 
   fnRandomImage(min, max, rand) {
       return Math.floor(rand * (max - min + 1)) + min;
-  };
+  }
 
   /**
    * Set the incoming data from Silo.

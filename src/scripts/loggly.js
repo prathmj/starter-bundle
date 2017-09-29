@@ -1,4 +1,3 @@
-/* eslint-disable*/
 import loggly from 'loggly';
 import GLOBAL_VARS from '../../webpack.settings.js'
 
@@ -32,7 +31,7 @@ class Loggly {
 
   _log(params) {
     return new Promise((resolve, reject) => {
-      this.loggly.log(this.params, (err) => {
+      this.loggly.log(params, (err) => {
         if (err) reject(err)
       })
     })
