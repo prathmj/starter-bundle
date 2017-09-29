@@ -1,6 +1,23 @@
+/*eslint-disable*/
 import test from 'ava';
 import View from '../src/scripts/view.js';
 import Loggly from '../src/scripts/loggly.js';
+
+const nock = require('nock');
+const request = require('request');
+
+nock.disableNetConnect();
+
+let body = {};
+let objPostParams = {
+	method: 'POST',
+	uri: 'https://logs-01.loggly.com/inputs/',
+	body: JSON.stringify(body),
+	headers: {
+		'user-agent': 'some-user-agent'
+	}
+};
+
 
 test('fnRandomImage is expected', t => {
 	const actual = View.prototype.fnRandomImage(0,1,0);
@@ -55,8 +72,22 @@ test('Loggly throws syntax error', t => {
 	t.is(error.message, "Loggly.log only accepts a custom object, 'setData', 'render', or 'updateView'")
 })
 
-test('Loggly logger handles API error', t => {
-	return loggly._log({}).catch(error => {
-		t.is(error.message, 'Loggly Error (403): Forbidden')
-	})
-})
+test.cb('Loggly API endpoint returns 204 response with success', t => {
+	let serverMock = nock('https://logs-01.loggly.com').post('/inputs/', {}).reply(204, 'Success');
+	const req = request(objPostParams).on('response', function(response) {
+		let actual = response.statusCode;
+		const expected = 204;
+   	t.is(actual, expected);
+    t.end(); 
+  });
+});
+
+test.cb('Loggly API endpoint returns 404 response with Bad Request', t => {
+	let serverMock = nock('https://logs-01.loggly.com').post('/inputs/', {}).reply(404, 'Bad Request');
+	const req = request(objPostParams).on('response', function(response) {
+		let actual = response.statusCode;
+		const expected = 404;
+   	t.is(actual, expected);
+    t.end();
+  });
+});
