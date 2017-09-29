@@ -1,10 +1,10 @@
 /*eslint-disable*/
 import test from 'ava';
-import View from '../src/scripts/view.js';
-import Loggly from '../src/scripts/loggly.js';
-
 import nock from 'nock';
 import request from 'request';
+
+import View from '../src/scripts/view.js';
+import Loggly from '../src/scripts/loggly.js';
 
 nock.disableNetConnect();
 
