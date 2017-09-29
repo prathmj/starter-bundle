@@ -1,3 +1,4 @@
+/*eslint-disable*/
 import test from 'ava';
 import nock from 'nock';
 import request from 'request';
