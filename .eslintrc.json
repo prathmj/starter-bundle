@@ -9,7 +9,11 @@
         "browser": true
     },
     "parserOptions": {  
-      "sourceType": "module"
+      "sourceType": "module",
+      "ecmaVersion": 6,
+      "ecmaFeatures": {
+          "experimentalObjectRestSpread": true
+      }
     },
     "globals": {
       "GLOBAL_VARS": true

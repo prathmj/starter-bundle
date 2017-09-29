@@ -9,5 +9,10 @@ module.exports = {
   appName: JSON.stringify(require('./package.json').name),
   campaign: 'LinkNYC Starter Bundle',
   datasetID: 'com.intersection.starter',
-  placeholderID: 'placeholder',
+  logglyToken: '__replace__',
+  logglyUsername: '__replace__',
+  logglyPassword: '__replace__',
+  logglyTag: '__replace__',
+  logglySubdomain: '__replace__',
+  placeholderID: 'placeholder'
 };

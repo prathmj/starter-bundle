@@ -15,10 +15,10 @@ class View {
 
     this.creativeContainerDebugger = window.document.getElementById(
     'creativeContainer-debugger');
+  }
 
-    this.fnRandomImage = function(min, max, rand) {
+  fnRandomImage(min, max, rand) {
       return Math.floor(rand * (max - min + 1)) + min;
-    };
   }
 
   /**
