@@ -9,10 +9,6 @@ class View {
 
   constructor() {
     this.rows = [];
-    this.currentRow = 0;
-    this.currentSlot = null;
-    this.created = false;
-    this.adSlots = {};
 
     this.container = window.document.getElementById('container');
   }
@@ -57,48 +53,6 @@ class View {
     this.rows = data;
   }
 
-  setUpAdUnit() {
-  // setUpAdUnit(city, venue) {
-    // switch (city) {
-    //   case "Staten Island":
-    //     city = "StatenIsland";
-    //     break;
-    //   case "Brooklyn":
-    //   case "Bronx":
-    //   case "Manhattan":
-    //     break;
-    //   default:
-    //     city = null;
-    //     break;
-    // }
-
-    const id = 'ad';
-
-    window.googletag.cmd.push(() => {
-      const unit = `/148446784/Link.NYC-Manhattan`;
-      window.googletag
-        .defineSlot(unit, [1080, 1920], id)
-        // .setTargeting('Venue', [venue])
-        .addService(window.googletag.pubads());
-    });
-
-    window.googletag.cmd.push(() => {
-      window.googletag.pubads().enableSingleRequest();
-      window.googletag.enableServices();
-      window.googletag.display(id);
-    });
-
-    return true;
-  }
-
-  createElement(id, className, tag = 'div') {
-    const element = window.document.createElement(tag);
-    element.classList.add(className);
-    element.id = id;
-
-    return element;
-  }
-
   /**
    * Render the placeholder or the main view.
    *
@@ -108,23 +62,9 @@ class View {
     if (!this.rows || !this.rows.length) {
       return;
     }
-
-    window.googletag.cmd.push(() => {
-      window.googletag.pubads().refresh();
-    });
-
     this._render();
     return;
-    // Logger.log('Rendering a new view.');
-    // if (this.rows === null || this.rows.length === 0) {
-    //   Tracker.track(this.deviceId, CAMPAIGN, 'placeholder');
-    //   this.placeholder.render();
-    //   return;
-    // }
-    //
-    // this.placeholder.hide();
-    // Tracker.track(this.deviceId, CAMPAIGN, 'normal');
-    // this._render();
+
   }
 
   /**
@@ -142,22 +82,17 @@ class View {
    *
    * TODO: Implement this method according to your needs.
    */
+  
+  renderIframeWithId(id) {
+    this.frame = window.document.createElement('iframe');
+    this.frame.src = 'https://s3.amazonaws.com/dfp-static-file/dfpStatic.html';
+    this.frame.id = id;
+    this.container.appendChild(this.frame);
+  }
+
   updateView() {
     // For this app, we don't need to do anything.
-
-    const {
-      city,
-      _index
-    } = this.rows[this.currentRow];
-
-    this.currentRow++;
-    if (this.currentRow >= this.rows.length) {
-      this.currentRow = 0;
-    }
-
-    if (!this.created) {
-      this.created = this.setUpAdUnit(city, _index);
-    }
+    this.renderIframeWithId('visibleFrame');
   }
 
   /**
@@ -177,6 +112,7 @@ class View {
    * TODO: Implement this method according to your needs.
    */
   _render() {
+    this.container.innerHTML = ''
     // try {
     //   this.container.removeChild(this.currentSlot);
     // } catch (err) {

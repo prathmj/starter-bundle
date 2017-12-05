@@ -12,6 +12,12 @@
   src: url("../fonts/source-sans-pro/SourceSansPro-Light.otf") format("opentype");
 }
 
+#visibleFrame {
+  width: 1080px;
+  height: 1920px;
+  z-index: 999999;
+}
+
 .ad {
   width: 1080px;
   height: 1920px;
