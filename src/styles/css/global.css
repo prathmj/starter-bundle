@@ -12,6 +12,20 @@
   src: url("../fonts/source-sans-pro/SourceSansPro-Light.otf") format("opentype");
 }
 
+.ad {
+  width: 1080px;
+  height: 1920px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.container {
+  width: 1080px;
+  height: 1920px;
+  background-color: #FFF000;
+}
+
 .hide {
   display: none;
 }

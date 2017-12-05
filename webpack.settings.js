@@ -14,5 +14,5 @@ module.exports = {
   logglyPassword: '__replace__',
   logglyTag: '__replace__',
   logglySubdomain: '__replace__',
-  placeholderID: 'placeholder'
+  // placeholderID: 'placeholder'
 };

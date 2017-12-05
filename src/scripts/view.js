@@ -1,24 +1,20 @@
-require('../styles/css/global.css');
-import Placeholder from './cortex/placeholder.js';
-import Logger from './cortex/logger.js';
-import Tracker from './cortex/tracker.js';
+/* global window */
+
+// import Logger from './logger.js';
+
+// TODO: Change this.
+// const CAMPAIGN = 'com.cortexpowered.campaigns.test-campaign';
 
 class View {
+
   constructor() {
-    this.placeholder = new Placeholder();
     this.rows = [];
-    this.deviceId = '';
-    this.productionEnv = process.env.NODE_ENV !== 'development';
+    this.currentRow = 0;
+    this.currentSlot = null;
+    this.created = false;
+    this.adSlots = {};
 
-    this.creativeContainer = window.document.getElementById(
-		'creativeContainer');
-
-    this.creativeContainerDebugger = window.document.getElementById(
-    'creativeContainer-debugger');
-  }
-
-  fnRandomImage(min, max, rand) {
-      return Math.floor(rand * (max - min + 1)) + min;
+    this.container = window.document.getElementById('container');
   }
 
   /**
@@ -53,36 +49,82 @@ class View {
    *   img.className = 'visible';
    * }
    *
+   * TODO: Implement this method according to your needs.
    *
    * @param {array} data The data rows.
-   *
    */
   setData(data) {
-    // Verify that the data matches Silo structure.
     this.rows = data;
+  }
 
-    if (data && data.length > 0) {
-      this.deviceId = data[0]._device_id;
-    }
+  setUpAdUnit() {
+  // setUpAdUnit(city, venue) {
+    // switch (city) {
+    //   case "Staten Island":
+    //     city = "StatenIsland";
+    //     break;
+    //   case "Brooklyn":
+    //   case "Bronx":
+    //   case "Manhattan":
+    //     break;
+    //   default:
+    //     city = null;
+    //     break;
+    // }
+
+    const id = 'ad';
+
+    window.googletag.cmd.push(() => {
+      const unit = `/148446784/Link.NYC-Manhattan`;
+      window.googletag
+        .defineSlot(unit, [1080, 1920], id)
+        // .setTargeting('Venue', [venue])
+        .addService(window.googletag.pubads());
+    });
+
+    window.googletag.cmd.push(() => {
+      window.googletag.pubads().enableSingleRequest();
+      window.googletag.enableServices();
+      window.googletag.display(id);
+    });
+
+    return true;
+  }
+
+  createElement(id, className, tag = 'div') {
+    const element = window.document.createElement(tag);
+    element.classList.add(className);
+    element.id = id;
+
+    return element;
   }
 
   /**
    * Render the placeholder or the main view.
    *
    * Every time the app receives a 'hidden' event this method will get called.
-   *
    */
   render() {
-    Logger.log('Rendering a new view.');
-    if (!window.document.getElementById(GLOBAL_VARS.placeholderID)) {
-      this.placeholder.render();
+    if (!this.rows || !this.rows.length) {
+      return;
     }
 
-    if (this.productionEnv) {
-      Tracker.track(this.deviceId, GLOBAL_VARS.campaign, 'tracked');
-    }
+    window.googletag.cmd.push(() => {
+      window.googletag.pubads().refresh();
+    });
 
     this._render();
+    return;
+    // Logger.log('Rendering a new view.');
+    // if (this.rows === null || this.rows.length === 0) {
+    //   Tracker.track(this.deviceId, CAMPAIGN, 'placeholder');
+    //   this.placeholder.render();
+    //   return;
+    // }
+    //
+    // this.placeholder.hide();
+    // Tracker.track(this.deviceId, CAMPAIGN, 'normal');
+    // this._render();
   }
 
   /**
@@ -98,8 +140,24 @@ class View {
    * this method when you need to perform some actions right before the view
    * becomes visible on the screen.
    *
+   * TODO: Implement this method according to your needs.
    */
   updateView() {
+    // For this app, we don't need to do anything.
+
+    const {
+      city,
+      _index
+    } = this.rows[this.currentRow];
+
+    this.currentRow++;
+    if (this.currentRow >= this.rows.length) {
+      this.currentRow = 0;
+    }
+
+    if (!this.created) {
+      this.created = this.setUpAdUnit(city, _index);
+    }
   }
 
   /**
@@ -116,26 +174,17 @@ class View {
    * make as few DOM manipulations as possible. Reusing DOM elements is better
    * than recreating them every time this method is called.
    *
+   * TODO: Implement this method according to your needs.
    */
   _render() {
-    this.creativeContainer.style.display = 'block';
-    if (this.rows === null || this.rows.length === 0) {
-      return;
-    }else{
-      this.placeholder.hide();
-    }
-
-    Logger.log(`The view has ${this.rows.length} data rows.`);
-
-    const row = this.rows;
-
-    const objImageRange = {
-      min: 0,
-      max: row.length - 1,
-      rand: Math.random()
-    };
-
-    this.creativeContainer.style.backgroundImage = 'url("' + row[this.fnRandomImage(objImageRange.min, objImageRange.max, objImageRange.rand)].url + '")';
+    // try {
+    //   this.container.removeChild(this.currentSlot);
+    // } catch (err) {
+    //   Logger.log('REMOVING SLOT', err);
+    // }
+    // while(this.container.firstChild) {
+    //   this.container.removeChild(this.container.firstChild)
+    // }
   }
 }
 
