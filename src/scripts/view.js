@@ -1,3 +1,4 @@
+require('../styles/css/global.css');
 /* global window */
 
 // import Logger from './logger.js';
