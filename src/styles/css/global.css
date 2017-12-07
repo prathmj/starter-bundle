@@ -13,9 +13,13 @@
 }
 
 #visibleFrame {
-  width: 1080px;
-  height: 1920px;
-  z-index: 999999;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 1080px !important;
+  height: 1920px !important;
+  z-index: 999999 !important;
+  display: block !important;
 }
 
 .ad {

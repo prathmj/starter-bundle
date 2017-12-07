@@ -87,6 +87,8 @@ class View {
   renderIframeWithId(id) {
     this.frame = window.document.createElement('iframe');
     this.frame.src = 'https://s3.amazonaws.com/dfp-static-file/dfpStatic.html';
+    this.frame.width = "1080px"
+    this.frame.height = "1920px"
     this.frame.id = id;
     this.container.appendChild(this.frame);
   }
