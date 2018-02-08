@@ -1,7 +1,6 @@
 require('../styles/css/global.css');
 import Placeholder from './cortex/placeholder.js';
 import Logger from './cortex/logger.js';
-import Tracker from './cortex/tracker.js';
 
 class View {
   constructor() {
@@ -9,16 +8,14 @@ class View {
     this.rows = [];
     this.deviceId = '';
     this.productionEnv = process.env.NODE_ENV !== 'development';
+    this.nbcSocialUrl = 'http://ec2-54-175-148-122.compute-1.amazonaws.com/';
+    this.frame = window.document.getElementById("myFrame");
 
     this.creativeContainer = window.document.getElementById(
 		'creativeContainer');
 
     this.creativeContainerDebugger = window.document.getElementById(
     'creativeContainer-debugger');
-  }
-
-  fnRandomImage(min, max, rand) {
-      return Math.floor(rand * (max - min + 1)) + min;
   }
 
   /**
@@ -78,10 +75,6 @@ class View {
       this.placeholder.render();
     }
 
-    if (this.productionEnv) {
-      Tracker.track(this.deviceId, GLOBAL_VARS.campaign, 'tracked');
-    }
-
     this._render();
   }
 
@@ -118,24 +111,12 @@ class View {
    *
    */
   _render() {
+    this.creativeContainer.innerHTML = '';
+    this.creativeContainer.innerHTML = '<iframe id="myFrame"></iframe>';
+    this.frame = window.document.getElementById("myFrame");
+    this.frame.src = this.nbcSocialUrl;
     this.creativeContainer.style.display = 'block';
-    if (this.rows === null || this.rows.length === 0) {
-      return;
-    }else{
-      this.placeholder.hide();
-    }
-
-    Logger.log(`The view has ${this.rows.length} data rows.`);
-
-    const row = this.rows;
-
-    const objImageRange = {
-      min: 0,
-      max: row.length - 1,
-      rand: Math.random()
-    };
-
-    this.creativeContainer.style.backgroundImage = 'url("' + row[this.fnRandomImage(objImageRange.min, objImageRange.max, objImageRange.rand)].url + '")';
+    this.placeholder.hide();
   }
 }
 
