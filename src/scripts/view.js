@@ -1,3 +1,7 @@
+const Juice = require('./juicer.js');
+const template = require('./base.js');
+
+
 require('../styles/css/global.css');
 import Placeholder from './cortex/placeholder.js';
 import Logger from './cortex/logger.js';
@@ -7,12 +11,13 @@ class View {
     this.placeholder = new Placeholder();
     this.rows = [];
     this.deviceId = '';
+    this.juice = new Juice();
     this.productionEnv = process.env.NODE_ENV !== 'development';
-    this.nbcSocialUrl = 'http://ec2-54-175-148-122.compute-1.amazonaws.com/';
+    this.nbcSocialUrl = 'http://ec2-34-227-221-138.compute-1.amazonaws.com:8080/nbcolympics?crtx_mode=skip';
     this.frame = window.document.getElementById("myFrame");
 
     this.creativeContainer = window.document.getElementById(
-		'creativeContainer');
+    'creativeContainer');
 
     this.creativeContainerDebugger = window.document.getElementById(
     'creativeContainer-debugger');
@@ -111,12 +116,31 @@ class View {
    *
    */
   _render() {
-    this.creativeContainer.innerHTML = '';
-    this.creativeContainer.innerHTML = '<iframe id="myFrame"></iframe>';
-    this.frame = window.document.getElementById("myFrame");
-    this.frame.src = this.nbcSocialUrl;
-    this.creativeContainer.style.display = 'block';
-    this.placeholder.hide();
+  this.juice.fetchPosts()
+  .then(res => {
+    let items = res.data.posts.items;
+    let node = this.juice.getRandomInt(items)
+    let normalizedItem = this.juice.normalize(items[node])
+    this.juice.getImageDimensions(normalizedItem)
+    .then(res => {
+      console.log(res)
+      const imageOrientation = res.height < res.width ? 'landscape' : 'portrait';
+      
+      if (imageOrientation === 'landscape') {
+        if (res.width >= 930) {
+          normalizedItem.styleObj = `height: ${res.height}px`;
+        } else {
+          const scale = 930 / res.width;
+          normalizedItem.styleObj = `height: ${res.height * scale}px`
+        }
+      } else if (imageOrientation === 'portrait') {
+        normalizedItem.styleObj = "height: 930px;  background-color: rgba(255,255,255,.2);"
+      }
+
+      normalizedItem.styleSheet = 'portrait-style.css';
+      window.document.body.innerHTML = template(normalizedItem);
+    })
+  })
   }
 }
 
