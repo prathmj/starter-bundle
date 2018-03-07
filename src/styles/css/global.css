@@ -16,31 +16,31 @@
   display: none;
 }
 
-body {
+html, body {
   margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow:hidden;
 }
 
-.creativeContainer {
-  position: relative;
-  width: 1080px;
-  height: 1920px;
-  font-family: Arial;
-  box-sizing: border-box;
+* {
   overflow: hidden;
-  display:none;
 }
 
-.creativeContainer-debugger {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 1080px;
-  height: 60px;
-  background-color: #fff;
-  font-family: "SourceSansPro-Bold";
-  color: #3598db;
-  font-size: 60px;
-  line-height: 60px;
+#myFrame {
+  position:fixed;
+  top:0px;
+  left:0px;
+  bottom:0px;
+  right:0px;
+  width:1080px;
+  height:1920px;
+  border:none;
+  margin:0;
+  padding:0;
+  overflow:hidden;
+  z-index:99998;
 }
 
 .placeholder {

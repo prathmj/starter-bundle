@@ -1,0 +1,98 @@
+html, body {
+	width: 1080px;
+	height: 1920px;
+	box-sizing: border-box;
+	margin: 0px;
+	padding: 0px;	
+}
+
+body {
+	color: white;
+	font-family: Arial;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+#logoContainer {
+	width: 1080px;
+	text-align: center;
+	padding-top: 45px;
+}
+
+#content {
+	width: 1080px;
+	text-align: center;
+}
+
+#contentContainer {
+	border: 5px solid white;
+	margin: 80px 80px 0px 80px;
+	padding: 20px;
+}
+
+#teams {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	margin: 15px 0px;
+}
+
+#teams > h2 {
+	display: inline-block;
+	padding: 15px 0px;
+	margin: 0px;
+	box-sizing: border-box;
+	font-size: 70px;
+	width: 100%;
+}
+
+#teams > h3 {
+	font-size: 30px;
+	margin: -10px;
+}
+
+#teams h2:first-child {
+}
+
+#teams h2:last-child {
+}
+
+#timeboard {
+	border-top: 2px solid white;
+	padding-top: 10px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+}
+
+#timeboard div {
+	width: 200px;
+}
+
+#timeboard h3 {
+	font-size: 35px;
+	font-weight: lighter;
+	margin: 10px;
+}
+
+#timeboard h4 {
+	font-size:  70px;
+	margin: 0px;
+}
+
+legend {
+	font-size: 50px;
+	font-weight: lighter;
+	width: 390px;
+}
+
+#venueContainer h3 {
+	font-size: 70px;
+	margin: 10px;
+}
+
+.clearfix {
+	clear: both;
+}

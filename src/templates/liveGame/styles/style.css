@@ -1,0 +1,90 @@
+html, body {
+	width: 1080px;
+	height: 1920px;
+	box-sizing: border-box;
+	margin: 0px;
+	padding: 0px;	
+}
+
+body {
+	background-image: url(../images/orangeBasketballBackground.png);
+	color: white;
+	font-family: Arial;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+#logoContainer {
+	width: 1080px;
+	text-align: center;
+	padding-top: 45px;
+}
+
+#content {
+	width: 1080px;
+	text-align: center;
+}
+
+#contentContainer {
+	border: 5px solid white;
+	margin: 80px 80px 0px 80px;
+	padding: 40px 20px;
+}
+
+#scoreboard {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+}
+
+.divider {
+	width: 2px !important;
+	border-left: 1px solid white;
+}
+
+#scoreboard > div {
+	width: 400px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+#scoreboard h3 {
+	font-size: 70px;
+	margin: 0px;
+}
+
+#scoreboard h4 {
+	font-size: 120px;
+	margin: 10px;
+	font-weight: lighter;
+	padding: 10px;
+}
+
+legend {
+	font-size: 50px;
+	font-weight: lighter;
+	padding: 0px 20px;
+}
+
+#venueContainer h3 {
+	font-size: 70px;
+	margin: 10px;
+}
+
+#content span {
+	color: rgb(255,30,10);
+	border-radius: 10px;
+	font-size: 35px;
+	position: absolute;
+	top: 50px;
+	left: 50px;
+	padding: 15px 30px;
+	background-color: rgba(0,0,0, .65);
+}
+
+.clearfix {
+	clear: both;
+}

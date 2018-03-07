@@ -32,6 +32,10 @@ function main() {
   const view = new View();
   view.render();
 
+  window.dataPassback = (cb) => {
+    cb(view.publicDataPassback())
+  }
+
   window.addEventListener(READY_EVENT, () => {
     Logger.log('Received the cortex-ready event.');
 

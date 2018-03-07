@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Countdown</title>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
+	<script type="text/javascript" src="./js/index.js"></script>
+	<script type="text/javascript" src="../main.js"></script>
+	<link rel="stylesheet" href="./styles/style.css" />
+</head>
+<body onload="main()">
+	<div id="logoContainer">
+		<img src="./images/spriteLogo.png">
+	</div>
+
+	<div id="content">
+		<fieldset id="contentContainer">
+			<legend id="js_period">FINAL SCORE</legend>
+			<div id="timeContainer">
+				<h2 id="js_timeLeft"></h2>
+			</div>
+			<div id="scoreboard">
+				<div id="teamOne">
+					<h3 id="js_teamOneName"></h3>
+					<h4 id="js_teamOneScore"></h4>
+				</div>
+				<div class="divider"></div>
+				<div id="teamTwo">
+					<h3 id="js_teamTwoName"></h3>
+					<h4 id="js_teamTwoScore"></h4>
+				</div>
+			</div>
+		</fieldset>
+		<div id="venueContainer">
+			<h3 id="js_venue"></h3>
+		</div>
+	</div>
+</body>
+</html>

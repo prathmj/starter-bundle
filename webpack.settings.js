@@ -17,13 +17,22 @@ module.exports = {
   placeholderID: 'placeholder',
 
   // Stats Configuration
-  sport: ["mlb"], //  MLB, NBA, NFL. One or more, leave blank for all.
-  team: ["miami"], // One or more, picks random team if blank. Sport must be specified.
+  sport: ['mlb', 'nba', 'nhl'], //  MLB, NBA, NFL, NHL. One or more, leave blank for all.
+  team: [], // One or more, picks random team if blank. Sport must be specified.
   variations: {
-    liveScore: true, // If available. If team is not specified, picks a random live game. Highest priority.
-    finalScore: true, // Show final score, only available if there was a game the same day. 2nd priority.
-    countdown: true, // If there is a game within the next day for the specified team(s), display a countdown. 3rd priority.
-    currentStandings: true // Lowest priority.
+    liveScore: {
+      active: true,
+      backgroundImage: 'liveScore-background.png'
+    }, 
+    finalScore: {
+      active: true,
+      backgroundImage: 'finalScore-background.png'
+    }, 
+    countdown: {
+      active: true,
+      backgroundImage: 'countdown-background.png'
+    },
+    // currentStandings: true // Lowest priority.
   },
   statsApiCreds: { // Required for each sport
     mlb: {

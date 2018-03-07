@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Countdown</title>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
+	<script type="text/javascript" src="./js/index.js"></script>
+	<script type="text/javascript" src="../main.js"></script>
+	<link rel="stylesheet" href="./styles/style.css" />
+</head>
+<body onload="main()">
+	<div id="logoContainer">
+		<img src="./images/spriteLogo.png">
+	</div>
+
+	<div id="content">
+		<fieldset id="contentContainer">
+			<legend>COUNTDOWN</legend>
+			<div id="teams">
+				<h2 id="js_teamOne"></h2>
+				<h3>VS</h3>
+				<h2 id="js_teamTwo"></h2>
+			</div>
+			<div class="clearfix"></div>
+			<div id="timeboard">
+				<div id="hours">
+						<h3>Hours</h3>
+						 <h4 id="js_hours"></h4>
+				</div>
+				<div id="minutes">
+						<h3>Minutes</h3>
+						 <h4 id="js_minutes"></h4>
+				</div>
+				<div id="seconds">
+						<h3>Seconds</h3>
+						 <h4 id="js_seconds"></h4>
+				</div>
+			</div>
+		</fieldset>
+		<div id="venueContainer">
+			<h3 id="js_venue"></h3>
+		</div>
+	</div>
+</body>
+</html>
