@@ -18,10 +18,10 @@ class View {
     'creativeContainer-debugger');
 
     this.sportUrlMap = {
-      mlb: "baseball/mlb",
-      nfl: "football/nfl",
-      nba: "basketball/nba",
-      nhl: "hockey/nhl"
+      MLB: "baseball/mlb",
+      NFL: "football/nfl",
+      NBA: "basketball/nba",
+      NHL: "hockey/nhl"
     }
   }
 
@@ -38,13 +38,14 @@ class View {
   }
 
   getSport() {
-    const sport = GLOBAL_VARS.sport;
-    const supportedSports = ["mlb", "nfl", "nba", "nhl", "soccer"];
+    const sports = GLOBAL_VARS.sports;
+    const sportsEnabled = Object.values(sports)
+      .map((sport, i) => (sport.enabled ? i : -1))
+      .filter(s => (s > -1))
 
-    let chosenSport = !sport || sport.length < 1 ? supportedSports[this.randomInt(3)] : sport[this.randomInt(sport.length)];
-    if (supportedSports.indexOf(chosenSport.toLowerCase()) < 0) throw `Sport: ${sport} is not supported currently`;
+    const randomKey = sportsEnabled[this.randomInt(sportsEnabled.length)]
 
-    return chosenSport.toLowerCase();
+    return Object.keys(sports)[randomKey]
   }
 
   jsonpFetchPromise(url) {
@@ -67,9 +68,10 @@ class View {
   }
 
   getTeamId(sport) {
-    if (!GLOBAL_VARS.team || GLOBAL_VARS.team.length < 1) return Promise.resolve(false);
+    const teams = GLOBAL_VARS.sports[sport].teams
+    if (!teams || teams.length < 1) return Promise.resolve(false);
 
-    const chosenTeam = GLOBAL_VARS.team[this.randomInt(GLOBAL_VARS.team.length)];
+    const chosenTeam = teams[this.randomInt(teams.length)];
 
     let key = GLOBAL_VARS.statsApiCreds[sport].key;
     let secret = GLOBAL_VARS.statsApiCreds[sport].secret;
@@ -150,10 +152,11 @@ class View {
     this.getTeamId(this.sport)
     .then(teamId => {
       const url = this.getScheduleUrl(teamId, this.sport);
+      console.log(url)
         this.jsonpFetchPromise(url)
         .then(res => {
           const events = res.apiResults[0].league.season.eventType[0].events;
-          if (GLOBAL_VARS.variations.liveScore.active) {
+          if (GLOBAL_VARS.variations.liveScore.enabled) {
             const liveGame = events.find(event => (event.eventStatus.eventStatusId == 2));
             if (liveGame) {
               const  { backgroundImage } = GLOBAL_VARS.variations.liveScore
@@ -163,7 +166,7 @@ class View {
             }
           }
 
-          if (GLOBAL_VARS.variations.finalScore.active) {
+          if (GLOBAL_VARS.variations.finalScore.enabled) {
             const finalScore = events.find(event => (event.eventStatus.eventStatusId == 3 || event.eventStatus.eventStatusId == 4));
             if (finalScore) {
               const  { backgroundImage } = GLOBAL_VARS.variations.finalScore
@@ -173,7 +176,7 @@ class View {
             }
           }
 
-          if (GLOBAL_VARS.variations.countdown.active) {
+          if (GLOBAL_VARS.variations.countdown.enabled) {
             const countdown =  events.find(event => (event.eventStatus.eventStatusId == 1));
             if (countdown) {
               const  { backgroundImage } = GLOBAL_VARS.variations.countdown

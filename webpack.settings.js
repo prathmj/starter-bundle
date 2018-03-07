@@ -17,37 +17,43 @@ module.exports = {
   placeholderID: 'placeholder',
 
   // Stats Configuration
-  sport: ['mlb', 'nba', 'nhl'], //  MLB, NBA, NFL, NHL. One or more, leave blank for all.
-  team: [], // One or more, picks random team if blank. Sport must be specified.
+  sports: {
+    MLB: { enabled: false, teams: [] },
+    NBA: { enabled: true, teams: [] },
+    NHL: { enabled: true, teams: [] },
+    NFL: { enabled: false, teams: [] }
+  },
   variations: {
     liveScore: {
-      active: true,
+      enabled: true,
       backgroundImage: 'liveScore-background.png'
     }, 
     finalScore: {
-      active: true,
+      enabled: true,
       backgroundImage: 'finalScore-background.png'
     }, 
     countdown: {
-      active: true,
+      enabled: true,
       backgroundImage: 'countdown-background.png'
     },
     // currentStandings: true // Lowest priority.
   },
-  statsApiCreds: { // Required for each sport
-    mlb: {
+
+  // Credentials
+  statsApiCreds: {
+    MLB: {
       key:"fz4xufyakejkdf9g3f3pssa2",
       secret: "C2ugTnH649"
     },
-    nfl: {
+    NFL: {
       key:"uxg4k9fhuy7ux9bh8kvzzfhj",
       secret: "7wC3EJxM8X"
     },
-    nba: {
+    NBA: {
       key:"98ja97ezdv9q9ukuy4ffve62",
       secret: "UH5Jr5DVnB"
     },
-    nhl: {
+    NHL: {
       key:"tvf5na4ds49vb5jppu6uuk6e",
       secret: "UE85hprB2w"
     }
