@@ -16,27 +16,40 @@ module.exports = {
   logglySubdomain: '__replace__',
   placeholderID: 'placeholder',
 
-  // Stats Configuration
+  // Stats API Configuration
   sports: {
-    MLB: { enabled: false, teams: [] },
-    NBA: { enabled: true, teams: [] },
-    NHL: { enabled: true, teams: [] },
-    NFL: { enabled: false, teams: [] }
-  },
-  variations: {
-    liveScore: {
-      enabled: true,
-      backgroundImage: 'liveScore-background.png'
-    }, 
-    finalScore: {
-      enabled: true,
-      backgroundImage: 'finalScore-background.png'
-    }, 
-    countdown: {
-      enabled: true,
-      backgroundImage: 'countdown-background.png'
+    MLB: { 
+      enabled: false,
+      teams: [],
+      bannerImage: 'spriteLogo.png',
+      backgroundImage: 'mlb-background.png'
     },
-    // currentStandings: true // Lowest priority.
+    NBA: {
+      enabled: false,
+      teams: [],
+      bannerImage: 'spriteLogo.png',
+      backgroundImage: 'nba-background.png'
+    },
+    NHL: {
+      enabled: true,
+      teams: [],
+      bannerImage: 'spriteLogo.png',
+      backgroundImage: 'nhl-background.png'
+    },
+    NFL: {
+      enabled: false,
+      teams: [],
+      bannerImage: 'spriteLogo.png',
+      backgroundImage: 'placeholder.png'
+    }
+  },
+
+  variations: {
+    liveScore:  { enabled: true, priority: 1 }, 
+    finalScore: { enabled: true, priority: 2 }, 
+    countdown:  { enabled: true, priority: 3 },
+    // Always last priority. Sport/Conference Required. Division optional.
+    standings: {  sport: 'NHL', conference: 'Eastern', division: '' }
   },
 
   // Credentials

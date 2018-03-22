@@ -25,7 +25,7 @@ class Data {
     });
 
     Logger.log(`Listening to dataset: ${this.datasetId}`);
-    window.Cortex.onData(this.datasetId, (data, cached) => {
+    window.Cortex.onData('weatherdat', (data, cached) => {
       Logger.log('Received data from Silo.', {cached: cached, data: data});
 
       if (data === null || data.length === 0) {
@@ -34,6 +34,7 @@ class Data {
 
       this.newData = data;
     });
+
   }
 }
 

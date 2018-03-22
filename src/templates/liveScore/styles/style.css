@@ -62,23 +62,26 @@ body {
 	padding: 10px;
 }
 
-#periodContainer {
-	margin: 0 auto;
-	margin-bottom: -10px;
-	text-align: center;
-	position: relative;
-	height: 0px;
-}
-
 legend {
 	font-size: 50px;
 	font-weight: lighter;
-	padding: 0px 15px;
+	padding: 0px 20px;
 }
 
 #venueContainer h3 {
 	font-size: 70px;
 	margin: 10px;
+}
+
+#content span {
+	color: rgb(255,30,10);
+	border-radius: 10px;
+	font-size: 35px;
+	position: absolute;
+	top: 50px;
+	left: 50px;
+	padding: 15px 30px;
+	background-color: rgba(0,0,0, .65);
 }
 
 .clearfix {

@@ -1,0 +1,107 @@
+html, body {
+	width: 1080px;
+	height: 1920px;
+	box-sizing: border-box;
+	margin: 0px;
+	padding: 0px;	
+}
+
+body {
+	color: white;
+	font-family: Arial;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+#bannerContainer {
+	width: 1080px;
+	text-align: center;
+	padding-top: 45px;
+}
+
+#content {
+	width: 1080px;
+	text-align: center;
+}
+
+#contentContainer {
+	border: 5px solid white;
+	margin: 80px 80px 0px 80px;
+	padding: 40px 20px;
+}
+
+#flexContainer {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+}
+
+#flexContainer > div:first-child {
+	flex: 1;
+}
+
+#flexContainer > div:nth-child(3) {
+	flex: 3;
+}
+
+#flexContainer > div {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+#flexContainer > div > h1 {
+	font-size: 4em;
+	padding: 0px;
+	margin: 0px;
+	overflow: visible;
+}
+
+#flexContainer > div:first-child > h2 {
+	font-size: 3em;
+}
+
+#flexContainer > div > * {
+	flex: 1;
+	height: 150px;
+	align-self: center;
+	justify-content: center;
+	align-items: center;
+}
+
+#flexContainer > div:first-child > * {
+	margin: 5px;
+}
+
+#teamInfo > div > h3 {
+	margin: 5px;
+	font-size: 3em;
+}
+
+#teamInfo > div > h4 {
+	margin-top: 0px;
+	margin-bottom: 20px;
+	font-size: 3.5em;
+	font-weight: lighter;
+}
+
+.divider {
+	width: 2px !important;
+	position: relative;
+	left: 20px;
+	border-left: 1px solid white;
+}
+
+
+legend {
+	font-size: 50px;
+	font-weight: lighter;
+	padding: 0px 20px;
+}
+
+.clearfix {
+	clear: both;
+}

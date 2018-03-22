@@ -6,10 +6,10 @@ lint:
 clean:
 	rm -rf ./build
 
-dev: clean lint
+dev: clean
 	npm run dev
 
-build: clean lint
+build: clean
 	npm run prod
 
 pack:
@@ -46,7 +46,7 @@ local-pack-custom:
 	cp $(app)-*.zip ./dist && \
 	rm $(app)-*.zip
 
-local-dist: clean lint local-pack
+local-dist: clean local-pack
 
-local-dist-custom: clean lint local-pack-custom
+local-dist-custom: clean local-pack-custom
 

@@ -32,8 +32,21 @@ function main() {
   const view = new View();
   view.render();
 
-  window.dataPassback = (cb) => {
-    cb(view.publicDataPassback())
+  window.addEventListener("message", m => {
+    if (m.data === 'ready') {
+      const data = view.publicDataPassback()
+      var frame = document.getElementById('myFrame'); 
+      frame.contentWindow.postMessage(JSON.stringify(data), '*');
+    }
+  })
+
+  window.loaded = () => {
+    console.log('derp')
+    // cb(view.publicDataPassback())
+    // .catch(e => {
+    //   console.log('error when rendering template', e);
+    //   view.renderCurrentStandings();
+    // })
   }
 
   window.addEventListener(READY_EVENT, () => {

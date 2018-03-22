@@ -9,10 +9,8 @@ const render = (data, resolve, reject) => {
 		venue.innerText = data.venue.name.toUpperCase();
 
 		updateTimer(data.startDate[1])
-		// resolve();
 	} catch (e) {
-		console.log('error', e)
-		// reject(e)
+		reject(e)
 	}
 }
 
