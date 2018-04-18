@@ -2,6 +2,10 @@ require('../styles/css/global.css');
 import Placeholder from './cortex/placeholder.js';
 import Logger from './cortex/logger.js';
 import Tracker from './cortex/tracker.js';
+import axios from 'axios';
+import Moment from 'moment-timezone';
+// import tz from ;
+// import TEST_API_RESPONSE from './test-api-response.js'
 
 class View {
   constructor() {
@@ -15,10 +19,60 @@ class View {
 
     this.creativeContainerDebugger = window.document.getElementById(
     'creativeContainer-debugger');
+
+    this.content = window.document.getElementById('content');
   }
 
   fnRandomImage(min, max, rand) {
       return Math.floor(rand * (max - min + 1)) + min;
+  }
+
+  getShowtimesAndTheater(theaters){
+    for (var j = 0; j < theaters.length; j++){
+      let movies = theaters[j].movies
+      for (var i = 0; i < movies.length; i++) {
+        if (movies[i].title == GLOBAL_VARS.film){
+          return {showtimes: movies[i].showtimes, theater: theaters[j]}
+        }
+      }
+    }
+    return {error: "This Film is not playing in the 10 nearest theaters"}
+  }
+
+  renderCountdown(diff){
+    let minutes = diff/60;
+    let hrs = Math.floor(minutes/60);
+    minutes = Math.round(minutes - (hrs*60))
+    let countdown = String(minutes) + "min"
+    if (hrs > 0)
+      countdown =  String(hrs) + "hr " + countdown
+    document.getElementById("timeToShow").innerHTML = countdown
+  }
+
+  renderShowtimes(showtime_data){
+    showtime_data = this.getShowtimesAndTheater(showtime_data.theaters);
+    let theater = showtime_data.theater
+    showtime_data = showtime_data.showtimes;
+    document.getElementById("theaterName").innerHTML = theater.name
+    let current_time = new Moment().tz('America/New_York').format("X");
+    let count = 0;
+    if (showtime_data) {
+      for (var i = 0; i < showtime_data.length; i++) {
+        let screening = new Moment(showtime_data[i].screening)
+        if (screening.format("X") > current_time){
+          count += 1
+          if (count == 1){
+            this.renderCountdown(screening.format("X") - current_time)
+          }
+          document.getElementById("time" + count).innerHTML = screening.format("h:mma");
+          if (count > 3)
+            break;
+        }
+      }
+    }
+    if (count == 0)
+      this.creativeContainerDebugger.innerHTML = "No Showtimes"
+      // this.placeholder.render()
   }
 
   /**
@@ -119,6 +173,8 @@ class View {
    */
   _render() {
     this.creativeContainer.style.display = 'block';
+    // this.placeholder.hide();
+    // this.creativeContainerDebugger.innerHTML = JSON.stringify(this.rows);
     if (this.rows === null || this.rows.length === 0) {
       return;
     }else{
@@ -126,17 +182,31 @@ class View {
     }
 
     Logger.log(`The view has ${this.rows.length} data rows.`);
-
     const row = this.rows;
+    const lat = row[0].latitude;
+    const lng = row[0].longitude;
+    this.creativeContainerDebugger.innerHTML = JSON.stringify(row[0]);
+    this.content.style.backgroundImage = 'url("images/avengers.png")';
 
-    const objImageRange = {
-      min: 0,
-      max: row.length - 1,
-      rand: Math.random()
-    };
+    let instance = axios.create({
+      headers: {
+        'Authorization': 'Basic bGlua255YzpkM2E5NGQwNGU0ZWNiOGNlOGRhYTNjZjE2Y2FlYWY4NjFmYmEyMTk4',
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      }
+    })
 
-    this.creativeContainer.style.backgroundImage = 'url("' + row[this.fnRandomImage(objImageRange.min, objImageRange.max, objImageRange.rand)].url + '")';
-  }
+    const apiEndPoint =  `https://9cyyylbjg1.execute-api.us-east-1.amazonaws.com/dev/?lat=${lat}&lng=${lng}`
+    instance.get(apiEndPoint)
+      .then ( (response) => {
+        this.renderShowtimes(response.data)
+      })
+      .catch( (err) => {
+        // this.placeholder.render()
+        this.creativeContainerDebugger.innerHTML = err
+        console.log(err)
+      });
+
+    }
 }
-
 module.exports = View;
