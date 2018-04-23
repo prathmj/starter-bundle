@@ -15,5 +15,7 @@ module.exports = {
   logglyTag: '__replace__',
   logglySubdomain: '__replace__',
   placeholderID: 'placeholder',
-  film: 'A Quiet Place'
+  images: ['images/avengers1.jpg', 'images/avengers2.jpg', 'images/avengers3.jpg', 'images/avengers4.jpg', 'images/avengers5.jpg'],
+  timezone: 'America/New_York',
+  film: 'A Quiet Place' //"Avengers: Infinity War"
 };

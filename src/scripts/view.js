@@ -21,10 +21,13 @@ class View {
     'creativeContainer-debugger');
 
     this.content = window.document.getElementById('content');
+
+    this.timezone = GLOBAL_VARS.timezone;
+    console.log(this.timezone)
   }
 
-  fnRandomImage(min, max, rand) {
-      return Math.floor(rand * (max - min + 1)) + min;
+  fnRandomImage(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
   getShowtimesAndTheater(theaters){
@@ -50,19 +53,21 @@ class View {
   }
 
   renderShowtimes(showtime_data){
+    window.moment = Moment;
     showtime_data = this.getShowtimesAndTheater(showtime_data.theaters);
-    let theater = showtime_data.theater
+    let theater = showtime_data.theater;
     showtime_data = showtime_data.showtimes;
-    document.getElementById("theaterName").innerHTML = theater.name
-    let current_time = new Moment().tz('America/New_York').format("X");
+    document.getElementById("theaterName").innerHTML = theater.name;
+    let current_time = Moment.tz(Moment(), this.timezone);
     let count = 0;
     if (showtime_data) {
       for (var i = 0; i < showtime_data.length; i++) {
-        let screening = new Moment(showtime_data[i].screening)
-        if (screening.format("X") > current_time){
+        let screening = Moment.tz(showtime_data[i].screening, this.timezone);
+        let screening_seconds = parseInt(screening.format("X"));1
+        if ( screening > current_time ){
           count += 1
           if (count == 1){
-            this.renderCountdown(screening.format("X") - current_time)
+            this.renderCountdown(screening_seconds - parseInt(current_time.format("X")));
           }
           document.getElementById("time" + count).innerHTML = screening.format("h:mma");
           if (count > 3)
@@ -71,8 +76,7 @@ class View {
       }
     }
     if (count == 0)
-      this.creativeContainerDebugger.innerHTML = "No Showtimes"
-      // this.placeholder.render()
+      this.placeholder.render()
   }
 
   /**
@@ -173,8 +177,6 @@ class View {
    */
   _render() {
     this.creativeContainer.style.display = 'block';
-    // this.placeholder.hide();
-    // this.creativeContainerDebugger.innerHTML = JSON.stringify(this.rows);
     if (this.rows === null || this.rows.length === 0) {
       return;
     }else{
@@ -185,9 +187,17 @@ class View {
     const row = this.rows;
     const lat = row[0].latitude;
     const lng = row[0].longitude;
-    this.creativeContainerDebugger.innerHTML = JSON.stringify(row[0]);
-    this.content.style.backgroundImage = 'url("images/avengers.png")';
-
+    let { images } = GLOBAL_VARS
+    console.log(images)
+    const objImageRange = {
+        min: 0,
+        max: images.length - 1
+      };
+    console.log(images[1])
+    this.content.style.backgroundImage = 'url(' + images[this.fnRandomImage(objImageRange.min, objImageRange.max)] + ')';
+    for (var i = 1; i <= 4; i++) {
+      document.getElementById("time" + i).innerHTML = ""
+    }
     let instance = axios.create({
       headers: {
         'Authorization': 'Basic bGlua255YzpkM2E5NGQwNGU0ZWNiOGNlOGRhYTNjZjE2Y2FlYWY4NjFmYmEyMTk4',
@@ -202,8 +212,7 @@ class View {
         this.renderShowtimes(response.data)
       })
       .catch( (err) => {
-        // this.placeholder.render()
-        this.creativeContainerDebugger.innerHTML = err
+        this.placeholder.render()
         console.log(err)
       });
 
