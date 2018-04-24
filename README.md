@@ -1,8 +1,27 @@
-# LinkNYC HTML5 Creative Starter Bundle
+# Moviefone API Dynamic Showtime Ad Bundle
 
-This starter bundle will provide the necessary tools to build and develop content & creative on a Link.    
-With this bundle you will have the ability to test locally and package for production.
+This bundle can be updated to support an ad for any film, on any Link running Cortex. It displays a banner at the bottom of the screen with the four upcoming showtimes at the nearest theater playing the specified film, as well as a count down to the next show time.
 
+### Configuring the Bundle
+To configure the bundle follow the steps below.
+
+Add your images to the images folder. They must be 1525px x 1080px. Add at least one fall back image as well. which should be 1920px x 1080px
+
+In webpack.settings.js set the following attributes:
+
+"timezone": Set the timezone in which the Link that the bundle will play on is located. This timezone must be supported by momentjs and will be used to calculate showtimes, and the countdown to showtimes. https://momentjs.com/timezone/
+
+"film": This is the name of the film being advertised. This name must be set exactly as it appears when returned from the Moviefone API.
+
+"creativeAttributes": This property is an array that tells which images to display. The bundle will pick from this array at random.
+
+##### creativeAttributes
+"image": the path to the 1525px x 1080px image that will be displayed above the showtimes.
+"color": hexadecimal representation of the color that will be applied the movie theater text
+"lightColor": hexadecimal representation of the color that will be applied the showtime text
+"placeholder": the path to the 1920px x 1080px image that will be displayed if no showtimes are available or an error occurs when rendering the showtimes
+
+<!--
 ## Bundle Dependencies
 
 ```
@@ -157,7 +176,7 @@ To log during production, you will first need an account with [Loggly](https://w
 **parameters**
 * **params** - Accepts an object. Whatever is passed here will be exactly what you see in the [Loggly](https://www.loggly.com) logs.
 * **method** - Accepts 'setData', 'render', or 'updateView'. By default, this will log a lifecycle object. It's recommended that each method is logged if using this functionality.
-* **additionalParams** (Optional) - Accepts an object. Additional parameters to be sent along with the lifecycle object. 
+* **additionalParams** (Optional) - Accepts an object. Additional parameters to be sent along with the lifecycle object.
 * **deviceId** - Accepts a string.
 
 **examples**
@@ -225,4 +244,4 @@ $ npm test
 * `Cortex:` Player on Link.
 * `Vistar:` Ad Server.
 * `SBC:` Single Board Computer.
-* `Silo:` Data distribution and management layer provided with Link.
+* `Silo:` Data distribution and management layer provided with Link. -->

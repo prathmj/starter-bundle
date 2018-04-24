@@ -4,8 +4,6 @@ import Logger from './cortex/logger.js';
 import Tracker from './cortex/tracker.js';
 import axios from 'axios';
 import Moment from 'moment-timezone';
-// import tz from ;
-// import TEST_API_RESPONSE from './test-api-response.js'
 
 class View {
   constructor() {
@@ -54,7 +52,6 @@ class View {
   }
 
   renderShowtimes(showtime_data, creative){
-    window.moment = Moment;
     showtime_data = this.getShowtimesAndTheater(showtime_data.theaters);
     let theater = showtime_data.theater;
     showtime_data = showtime_data.showtimes;
@@ -83,6 +80,30 @@ class View {
     }
     if (count == 0)
       this.placeholder.render()
+  }
+
+  callMoviefoneAPI(creative){
+    const row = this.rows;
+    const lat = row[0].latitude;
+    const lng = row[0].longitude;
+    let instance = axios.create({
+      headers: {
+        'Authorization': 'Basic bGlua255YzpkM2E5NGQwNGU0ZWNiOGNlOGRhYTNjZjE2Y2FlYWY4NjFmYmEyMTk4',
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      }
+    })
+    const apiEndPoint =  `https://9cyyylbjg1.execute-api.us-east-1.amazonaws.com/dev/?lat=${lat}&lng=${lng}`
+    instance.get(apiEndPoint)
+      .then ( (response) => {
+        localStorage.setItem("moviefone_showtimes", JSON.stringify(response.data))
+        localStorage.setItem("moviefone_showtimes_stored_date", Moment.tz(Moment(), this.timezone).format("DD"))
+        this.renderShowtimes(response.data, creative)
+      })
+      .catch( (err) => {
+        this.placeholder.render()
+        console.log(err)
+      });
   }
 
   /**
@@ -164,9 +185,6 @@ class View {
    *
    */
   updateView() {
-
-      //this._render();
-
   }
 
   /**
@@ -193,9 +211,7 @@ class View {
     }
 
     Logger.log(`The view has ${this.rows.length} data rows.`);
-    const row = this.rows;
-    const lat = row[0].latitude;
-    const lng = row[0].longitude;
+
 
     let { creativeAttributes } = GLOBAL_VARS;
     const objImageRange = {
@@ -210,24 +226,15 @@ class View {
     for (var i = 1; i <= 4; i++) {
       document.getElementById("time" + i).innerHTML = "";
     }
-    let instance = axios.create({
-      headers: {
-        'Authorization': 'Basic bGlua255YzpkM2E5NGQwNGU0ZWNiOGNlOGRhYTNjZjE2Y2FlYWY4NjFmYmEyMTk4',
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
+
+    if (localStorage.getItem("moviefone_showtimes")){
+      let current_day = Moment.tz(Moment(), this.timezone).format("DD")
+      let data_stored_day = localStorage.getItem("moviefone_showtimes_stored_date")
+      let showtimes_data = JSON.parse(localStorage.getItem("moviefone_showtimes"))
+      current_day == data_stored_day ? this.renderShowtimes(showtimes_data, creative) : this.callMoviefoneAPI(creative)
+    } else {
+      this.callMoviefoneAPI(creative)
       }
-    })
-
-    const apiEndPoint =  `https://9cyyylbjg1.execute-api.us-east-1.amazonaws.com/dev/?lat=${lat}&lng=${lng}`
-    instance.get(apiEndPoint)
-      .then ( (response) => {
-        this.renderShowtimes(response.data, creative)
-      })
-      .catch( (err) => {
-        this.placeholder.render()
-        console.log(err)
-      });
-
     }
 }
 module.exports = View;
