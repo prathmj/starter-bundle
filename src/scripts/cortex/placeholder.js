@@ -3,6 +3,10 @@ import Logger from './logger.js';
 class Placeholder {
   constructor() {
     this.hidden = false;
+    this.placeholderID = GLOBAL_VARS.placeholderID;
+    this._preRender()
+    this.imagePath = "images/placeholder1.jpg";
+    // this.setPlaceholderImage(this.imagePath)
   }
 
   /**
@@ -20,23 +24,25 @@ class Placeholder {
   render() {
     Logger.log('Rendering the placeholder image.');
 
-    const img = new window.Image();
-    img.src = "images/placeholder.jpg";
-    img.onerror = e => {
+    if (!this.img){
+      this.img = this._setDefaultImg(this.imagePath)
+    }
+    this.img.onerror = e => {
       console.error("Failed to load the placeholder image: ", e);
     };
 
-    if (!this.placeholderDiv) {
+    if (!this.placeholderDiv){
       const div = window.document.createElement('div');
-      div.id = GLOBAL_VARS.placeholderID;
+      div.id = this.placeholderID;
+      div.innerHTML = "";
       div.className = 'placeholder';
-      div.appendChild(img);
-
       window.document.body.appendChild(div);
-      this.placeholderDiv = window.document.getElementById(GLOBAL_VARS.placeholderID);
-    }else if (this.placeholderDiv) {
-      this.placeholderDiv.className = 'placeholder';
+      this.placeholderDiv = window.document.getElementById(this.placeholderID);
     }
+
+    this.placeholderDiv.innerHTML = "";
+    this.placeholderDiv.appendChild(this.img);
+    this.show()
   }
 
   /**
@@ -63,6 +69,33 @@ class Placeholder {
     Logger.log('Showing the placeholder image.');
     this.placeholderDiv.className = 'placeholder';
     this.hidden = false;
+  }
+
+  _preRender() {
+    this.images = [];
+    GLOBAL_VARS.creativeAttributes.forEach((obj, index) => {
+      const { placeholder } = obj;
+      const img = new window.Image();
+      img.onload = () => {
+        this.images.push(img);
+        if (index === 0) {
+          this.setPlaceholderImage(placeholder)
+        }
+      }
+      img.src = placeholder;
+     })
+
+  }
+
+  setPlaceholderImage(imagePath) {
+    const filteredImages = this.images.filter(img => img.src.indexOf(imagePath) > -1)
+    this.img = filteredImages.length > 0 ?  filteredImages[0] : this._setDefaultImg(imagePath);
+  }
+
+  _setDefaultImg(imagePath) {
+    const img = new window.Image();
+    img.src = imagePath;
+    return img;
   }
 }
 

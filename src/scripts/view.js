@@ -23,7 +23,8 @@ class View {
     this.content = window.document.getElementById('content');
 
     this.timezone = GLOBAL_VARS.timezone;
-    console.log(this.timezone)
+
+    this.image = null;
   }
 
   fnRandomImage(min, max) {
@@ -52,12 +53,14 @@ class View {
     document.getElementById("timeToShow").innerHTML = countdown
   }
 
-  renderShowtimes(showtime_data){
+  renderShowtimes(showtime_data, creative){
     window.moment = Moment;
     showtime_data = this.getShowtimesAndTheater(showtime_data.theaters);
     let theater = showtime_data.theater;
     showtime_data = showtime_data.showtimes;
-    document.getElementById("theaterName").innerHTML = theater.name;
+    let theater_div = document.getElementById("theaterName")
+    theater_div.innerHTML = theater.name;
+    theater_div.style.color = creative.color
     let current_time = Moment.tz(Moment(), this.timezone);
     let count = 0;
     if (showtime_data) {
@@ -69,7 +72,10 @@ class View {
           if (count == 1){
             this.renderCountdown(screening_seconds - parseInt(current_time.format("X")));
           }
-          document.getElementById("time" + count).innerHTML = screening.format("h:mma");
+          let showtime_div = document.getElementById("time" + count)
+          showtime_div.innerHTML = screening.format("h:mma");
+          if (count > 1)
+            showtime_div.style.color = creative.lightColor;
           if (count > 3)
             break;
         }
@@ -158,6 +164,9 @@ class View {
    *
    */
   updateView() {
+
+      //this._render();
+
   }
 
   /**
@@ -187,16 +196,19 @@ class View {
     const row = this.rows;
     const lat = row[0].latitude;
     const lng = row[0].longitude;
-    let { images } = GLOBAL_VARS
-    console.log(images)
+
+    let { creativeAttributes } = GLOBAL_VARS;
     const objImageRange = {
         min: 0,
-        max: images.length - 1
+        max: creativeAttributes.length - 1
       };
-    console.log(images[1])
-    this.content.style.backgroundImage = 'url(' + images[this.fnRandomImage(objImageRange.min, objImageRange.max)] + ')';
+    let creative = creativeAttributes[this.fnRandomImage(objImageRange.min, objImageRange.max)]
+    this.image = creative.image;
+    this.placeholder.setPlaceholderImage(creative.placeholder)
+
+    this.content.style.backgroundImage = 'url(' + this.image + ')';
     for (var i = 1; i <= 4; i++) {
-      document.getElementById("time" + i).innerHTML = ""
+      document.getElementById("time" + i).innerHTML = "";
     }
     let instance = axios.create({
       headers: {
@@ -209,7 +221,7 @@ class View {
     const apiEndPoint =  `https://9cyyylbjg1.execute-api.us-east-1.amazonaws.com/dev/?lat=${lat}&lng=${lng}`
     instance.get(apiEndPoint)
       .then ( (response) => {
-        this.renderShowtimes(response.data)
+        this.renderShowtimes(response.data, creative)
       })
       .catch( (err) => {
         this.placeholder.render()
